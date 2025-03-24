@@ -1,0 +1,156 @@
+Q: What is the name of the faculty member?
+A: 1
+
+Q: What is the designation of 1?
+A: MR.K.ANIL KUMAR
+
+Q: What is the department of 1?
+A: CSD
+
+Q: What are the qualifications of 1?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 2
+
+Q: What is the designation of 2?
+A: DR. VISHAL REDDY
+
+Q: What is the department of 2?
+A: CSD
+
+Q: What are the qualifications of 2?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 3
+
+Q: What is the designation of 3?
+A: DR. CH. RATHAN KUMAR
+
+Q: What is the department of 3?
+A: CSD
+
+Q: What are the qualifications of 3?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 4
+
+Q: What is the designation of 4?
+A: MS.A.PAVANI
+
+Q: What is the department of 4?
+A: CSD
+
+Q: What are the qualifications of 4?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 5
+
+Q: What is the designation of 5?
+A: MS.P.APARNA
+
+Q: What is the department of 5?
+A: CSD
+
+Q: What are the qualifications of 5?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 6
+
+Q: What is the designation of 6?
+A: MS.AYESHA ANJUM
+
+Q: What is the department of 6?
+A: CSD
+
+Q: What are the qualifications of 6?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 7
+
+Q: What is the designation of 7?
+A: MR.A RAVINDAR
+
+Q: What is the department of 7?
+A: CSD
+
+Q: What are the qualifications of 7?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 8
+
+Q: What is the designation of 8?
+A: MR.P VAMSHI KRISHNA
+
+Q: What is the department of 8?
+A: CSD
+
+Q: What are the qualifications of 8?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 9
+
+Q: What is the designation of 9?
+A: MS.PADMAVATHI B
+
+Q: What is the department of 9?
+A: CSD
+
+Q: What are the qualifications of 9?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 10
+
+Q: What is the designation of 10?
+A: MS.DEEKSHITHA Y
+
+Q: What is the department of 10?
+A: CSD
+
+Q: What are the qualifications of 10?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 11
+
+Q: What is the designation of 11?
+A: MS.G VANAJA
+
+Q: What is the department of 11?
+A: CSD
+
+Q: What are the qualifications of 11?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 12
+
+Q: What is the designation of 12?
+A: MS.G SWETHA
+
+Q: What is the department of 12?
+A: CSD
+
+Q: What are the qualifications of 12?
+A: N/A
+
+--------------------------------------------------

@@ -1,0 +1,377 @@
+Q: What is the name of the faculty member?
+A: 1
+
+Q: What is the designation of 1?
+A: DR. T.V.G.SRIDEVI
+
+Q: What is the department of 1?
+A: CSM
+
+Q: What are the qualifications of 1?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 2
+
+Q: What is the designation of 2?
+A: DR.K.BHARGAVI
+
+Q: What is the department of 2?
+A: CSM
+
+Q: What are the qualifications of 2?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 3
+
+Q: What is the designation of 3?
+A: DR. PATIL YOGITA DATTATRAYA
+
+Q: What is the department of 3?
+A: CSM
+
+Q: What are the qualifications of 3?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 4
+
+Q: What is the designation of 4?
+A: DR. D KISHORE BABU
+
+Q: What is the department of 4?
+A: CSM
+
+Q: What are the qualifications of 4?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 5
+
+Q: What is the designation of 5?
+A: DR. CH. SITA KAMESWARI
+
+Q: What is the department of 5?
+A: CSM
+
+Q: What are the qualifications of 5?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 6
+
+Q: What is the designation of 6?
+A: MS. M.ASHA JYOTHI
+
+Q: What is the department of 6?
+A: CSM
+
+Q: What are the qualifications of 6?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 7
+
+Q: What is the designation of 7?
+A: MS. J.KAMAL VIJETHA
+
+Q: What is the department of 7?
+A: CSM
+
+Q: What are the qualifications of 7?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 8
+
+Q: What is the designation of 8?
+A: MR. Y. SINGARAIAH
+
+Q: What is the department of 8?
+A: CSM
+
+Q: What are the qualifications of 8?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 9
+
+Q: What is the designation of 9?
+A: MR. T.VENU
+
+Q: What is the department of 9?
+A: CSM
+
+Q: What are the qualifications of 9?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 10
+
+Q: What is the designation of 10?
+A: MR.M.SRINIVAS
+
+Q: What is the department of 10?
+A: CSM
+
+Q: What are the qualifications of 10?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 11
+
+Q: What is the designation of 11?
+A: MR. THOKA UDAYA KUMAR
+
+Q: What is the department of 11?
+A: CSM
+
+Q: What are the qualifications of 11?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 12
+
+Q: What is the designation of 12?
+A: MR.B.PANDYA NAIK
+
+Q: What is the department of 12?
+A: CSM
+
+Q: What are the qualifications of 12?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 13
+
+Q: What is the designation of 13?
+A: MS. R.PRIYANKA
+
+Q: What is the department of 13?
+A: CSM
+
+Q: What are the qualifications of 13?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 14
+
+Q: What is the designation of 14?
+A: MR. M.NARESH
+
+Q: What is the department of 14?
+A: CSM
+
+Q: What are the qualifications of 14?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 15
+
+Q: What is the designation of 15?
+A: MS. P.DEEPIKA
+
+Q: What is the department of 15?
+A: CSM
+
+Q: What are the qualifications of 15?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 16
+
+Q: What is the designation of 16?
+A: MS. N.LAKSHMI PRASANNA
+
+Q: What is the department of 16?
+A: CSM
+
+Q: What are the qualifications of 16?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 17
+
+Q: What is the designation of 17?
+A: MR. SAI CHARAVARTHY
+
+Q: What is the department of 17?
+A: CSM
+
+Q: What are the qualifications of 17?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 18
+
+Q: What is the designation of 18?
+A: MS.A SRI TULASI
+
+Q: What is the department of 18?
+A: CSM
+
+Q: What are the qualifications of 18?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 19
+
+Q: What is the designation of 19?
+A: MS. M SRUJNA
+
+Q: What is the department of 19?
+A: CSM
+
+Q: What are the qualifications of 19?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 20
+
+Q: What is the designation of 20?
+A: MS. N PARIMALA
+
+Q: What is the department of 20?
+A: CSM
+
+Q: What are the qualifications of 20?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 21
+
+Q: What is the designation of 21?
+A: MR. S CHANDRA SHEKAR
+
+Q: What is the department of 21?
+A: CSM
+
+Q: What are the qualifications of 21?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 22
+
+Q: What is the designation of 22?
+A: MS.S LAVANYA
+
+Q: What is the department of 22?
+A: CSM
+
+Q: What are the qualifications of 22?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 23
+
+Q: What is the designation of 23?
+A: MS.K AISHWARYA
+
+Q: What is the department of 23?
+A: CSM
+
+Q: What are the qualifications of 23?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 24
+
+Q: What is the designation of 24?
+A: MS. SURABHI ANURADHA
+
+Q: What is the department of 24?
+A: CSM
+
+Q: What are the qualifications of 24?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 25
+
+Q: What is the designation of 25?
+A: MS. E HARISMITHA
+
+Q: What is the department of 25?
+A: CSM
+
+Q: What are the qualifications of 25?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 26
+
+Q: What is the designation of 26?
+A: MS.G VASANTHA
+
+Q: What is the department of 26?
+A: CSM
+
+Q: What are the qualifications of 26?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 27
+
+Q: What is the designation of 27?
+A: MS.J ANUSHA
+
+Q: What is the department of 27?
+A: CSM
+
+Q: What are the qualifications of 27?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 28
+
+Q: What is the designation of 28?
+A: MS.M LAVANYA
+
+Q: What is the department of 28?
+A: CSM
+
+Q: What are the qualifications of 28?
+A: N/A
+
+--------------------------------------------------
+Q: What is the name of the faculty member?
+A: 29
+
+Q: What is the designation of 29?
+A: MS.Y DEEPTHI
+
+Q: What is the department of 29?
+A: CSM
+
+Q: What are the qualifications of 29?
+A: N/A
+
+--------------------------------------------------

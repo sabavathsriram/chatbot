@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Chatbot</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        /* [Your existing CSS remains unchanged] */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { display: flex; flex-direction: column; align-items: center; background: #f0f2f5; height: 100vh; }
+        .navbar { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: #333; color: white; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }
+        .menu-icon i { font-size: 22px; cursor: pointer; }
+        .title { font-size: 18px; font-weight: bold; text-align: center; flex: 1; }
+        .profile-icon { width: 35px; height: 35px; background-color: white; color: #333; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        .chat-container { width: 90%; max-width: 600px; flex-grow: 1; padding: 20px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; max-height: 65vh; border-radius: 10px; background: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); margin-top: 20px; }
+        .message { max-width: 75%; padding: 12px; border-radius: 15px; font-size: 14px; word-wrap: break-word; }
+        .bot { background: #e1f5fe; align-self: flex-start; }
+        .user { background: #d1e7dd; align-self: flex-end; }
+        .typing { font-style: italic; color: gray; }
+        .faq-section { text-align: center; margin: 20px 0; }
+        .faq-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
+        .faq-buttons button { background: #333; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; transition: 0.3s; }
+        .faq-buttons button:hover { background: #555; }
+        .chat-input { width: 90%; max-width: 600px; display: flex; align-items: center; padding: 10px; background: white; border-radius: 30px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); position: fixed; bottom: 10px; }
+        .chat-input input { flex: 1; padding: 12px; border: none; border-radius: 30px; background: #f1f1f1; outline: none; font-size: 16px; padding-right: 50px; }
+        .send-btn { position: absolute; right: 15px; background: #333; border: none; padding: 12px; border-radius: 50%; cursor: pointer; color: white; display: flex; align-items: center; justify-content: center; font-size: 18px; width: 40px; height: 40px; transition: 0.3s; }
+        .send-btn:hover { background: #555; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="menu-icon"><i class="fas fa-bars"></i></div>
+        <div class="title">How Can I Assist You Today?</div>
+        <div class="profile-icon">才</div>
+    </nav>
+    <div class="chat-container" id="chatbox">
+        <div class="message bot">
+            Hello! I’m your college assistant. How can I help you today? You can ask me about admissions, courses, faculty, exams, placements, campus facilities, and many more!
+        </div>
+    </div>
+    <div class="faq-section">
+        <h3>FAQs</h3>
+        <div class="faq-buttons">
+            <button onclick="sendFAQ('Tell me about Admissions')">Admissions</button>
+            <button onclick="sendFAQ('Tell me about Placements')">Placements</button>
+            <button onclick="sendFAQ('Tell me about Campus Facilities')">Campus Facilities</button>
+            <button onclick="sendFAQ('Tell me about Notifications')">Notifications & Reminders</button>
+        </div>
+    </div>
+    <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Ask your question here!" onkeypress="handleKeyPress(event)">
+        <button class="send-btn" id="sendBtn">➜</button>
+    </div>
+
+    <script>
+        async function getAnswer(query) {
+            try {
+                const response = await fetch("http://localhost:8001/query/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ query: query })
+                });
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                const data = await response.json();
+                return data.answer;
+            } catch (error) {
+                console.error("Fetch error:", error);
+                return "Sorry, something went wrong. Please try again!";
+            }
+        }
+    
+        document.getElementById("sendBtn").addEventListener("click", async function () {
+            const query = document.getElementById("userInput").value.trim();
+            if (!query) return alert("Please enter a query!");
+    
+            let chatBox = document.getElementById("chatbox");
+            let userMessage = document.createElement("div");
+            userMessage.classList.add("message", "user");
+            userMessage.textContent = query;
+            chatBox.appendChild(userMessage);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            document.getElementById("userInput").value = "";
+    
+            let typingIndicator = document.createElement("div");
+            typingIndicator.classList.add("message", "bot", "typing");
+            typingIndicator.textContent = "Typing...";
+            chatBox.appendChild(typingIndicator);
+            chatBox.scrollTop = chatBox.scrollHeight;
+    
+            const answer = await getAnswer(query);
+            chatBox.removeChild(typingIndicator);
+            let botMessage = document.createElement("div");
+            botMessage.classList.add("message", "bot");
+            botMessage.textContent = answer;
+            chatBox.appendChild(botMessage);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        });
+    
+        function sendFAQ(question) {
+            document.getElementById("userInput").value = question;
+            document.getElementById("sendBtn").click();
+        }
+    
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                document.getElementById("sendBtn").click();
+            }
+        }
+    </script>
+</body>
+</html>

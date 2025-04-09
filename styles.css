@@ -1,0 +1,114 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu-icon i {
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    flex: 1;
+}
+
+.profile-icon {
+    width: 35px;
+    height: 35px;
+    background-color: #ddd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+/* Chat Container */
+.chat-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.message {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.bot {
+    background: #ddd;
+    align-self: flex-start;
+}
+
+.user {
+    background: #ddd;
+    align-self: flex-end;
+}
+
+/* FAQs */
+.faq-section {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.faq-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.faq-buttons button {
+    background: #ddd;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Chat Input */
+.chat-input {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: white;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    background: #eee;
+}
+
+.mic-btn, .send-btn {
+    background: #ddd;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}

@@ -1,0 +1,18 @@
+[
+    {"question": "What is the purpose of the KMIT Central Library?", "answer": "The KMIT Central Library promotes intellectual growth and creativity by developing collections, facilitating access to information resources, and teaching the effective use of research materials."},
+    {"question": "When was the KMIT Central Library established?", "answer": "The KMIT Central Library was established in 2007."},
+    {"question": "Where is the library located?", "answer": "The KMIT Central Library is centrally located on the KMIT campus and is surrounded by classrooms, laboratories, and sports facilities."},
+    {"question": "What are the different sections in the library?", "answer": "The library is divided into the following sections:\nStack Area\nReading Room\nReference and Periodical Section\nCirculation Section\nDigital Library\nReprographic Section"},
+    {"question": "What is the seating capacity of the library?", "answer": "The library has a seating capacity of 100 users."},
+    {"question": "What are the rules for using the library?", "answer": "Some important rules include:\nUsers must store their belongings in designated racks.\nIdentity cards must be shown at the checkpoint.\nBooks taken out must be left on a table rather than reshelved.\nMarking, underlining, or damaging books is prohibited.\nLost books must be reported immediately."},
+    {"question": "What is the role of the Library Advisory Committee?", "answer": "The Library Advisory Committee includes representatives from all academic departments and meets twice a year to oversee library operations."},
+    {"question": "How many books and journals does the library have?", "answer": "The library holds 19,430 books, 4,315 titles, and 73 print journals."},
+    {"question": "How are books and journals distributed among branches?", "answer": "The distribution is as follows:\nCSE: 10,171 volumes, 27 journals\nIT: 2,195 volumes, 13 journals\nECE: 3,297 volumes, 17 journals\nEIE: 1,921 volumes, 2 journals\nH&S: 1,846 volumes, 9 journals"},
+    {"question": "How can I contact the library?", "answer": "You can contact the library at info@kmit.in or call 040-23261407."},
+    
+        
+        {"question": "Tell me about Campus Facilities", "answer": "KMIT offers various campus facilities including a Central Library with 19,430 books and 100-seat capacity, indoor sports like badminton and yoga, and outdoor sports facilities such as a football field, basketball court, and volleyball court."},
+       
+            {"question": "Tell me about Notifications", "answer": "Notifications about events, exams, and placements are typically posted on the KMIT student portal or announced via email. Contact info@kmit.in for updates."}
+          
+]

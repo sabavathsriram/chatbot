@@ -1,0 +1,22 @@
+[
+    {"question": "Who is the HOD of the CSE (Data Science) department?", "answer": "The Head of the Department (HOD) for CSE (Data Science) is Mr. K. Anil Kumar, who holds an M.Tech degree."},
+    {"question": "How many faculty members are there in the CSE (Data Science) department?", "answer": "The CSE (Data Science) department has 12 faculty members, including the HOD and Assistant Professors."},
+    {"question": "Can you provide a list of all faculty members in the CSE (Data Science) department?", "answer": "Sure! Here is the list of faculty members:\n🔹 HOD\nMr. K. Anil Kumar – M.Tech\n🔹 Assistant Professors (Ph.D.)\nDr. Vishal Reddy – Ph.D.\nDr. Ch. Rathan Kumar – Ph.D.\n🔹 Assistant Professors (M.Tech)\nMs. A. Pavani\nMs. P. Aparna\nMs. Ayesha Anjum\nMr. A. Ravindar\nMr. P. Vamshi Krishna\nMs. Padmavathi B\nMs. Deekshitha Y\nMs. G. Vanaja\nMs. G. Swetha"},
+    {"question": "How many faculty members hold a Ph.D.?", "answer": "Two faculty members have a Ph.D.:\nDr. Vishal Reddy\nDr. Ch. Rathan Kumar"},
+    {"question": "Which faculty members have an M.Tech qualification?", "answer": "The following faculty members hold an M.Tech degree:\nMr. K. Anil Kumar (HOD)\nMs. A. Pavani\nMs. P. Aparna\nMs. Ayesha Anjum\nMr. A. Ravindar\nMr. P. Vamshi Krishna\nMs. Padmavathi B\nMs. Deekshitha Y\nMs. G. Vanaja\nMs. G. Swetha"},
+    {"question": "Who are the most experienced faculty members in the CSE (Data Science) department?", "answer": "Mr. K. Anil Kumar (HOD)\nDr. Vishal Reddy\nDr. Ch. Rathan Kumar"},
+    {"question": "Which faculty members specialize in Data Science and Machine Learning?", "answer": "Dr. Vishal Reddy\nDr. Ch. Rathan Kumar\nMs. A. Pavani"},
+    {"question": "Which faculty members teach programming-related subjects?", "answer": "Faculty members handling Python, Java, and C++ include:\nMs. A. Pavani\nMr. P. Vamshi Krishna\nMs. Deekshitha Y"},
+    {"question": "Who is responsible for teaching AI and Data Science subjects?", "answer": "Dr. Vishal Reddy\nDr. Ch. Rathan Kumar"},
+    {"question": "Who handles Database Management and Big Data Analytics?", "answer": "Ms. P. Aparna\nMs. G. Swetha"},
+    {"question": "How can I get help with my Data Science project?", "answer": "You can reach out to Dr. Vishal Reddy or Ms. A. Pavani for project guidance."},
+    {"question": "Which faculty members provide guidance for internships and placements?", "answer": "Mr. K. Anil Kumar (HOD) and Ms. Ayesha Anjum assist students with internship opportunities and placements."},
+    {"question": "Who can I approach for research guidance in Data Science?", "answer": "Dr. Vishal Reddy and Dr. Ch. Rathan Kumar provide mentorship for research and publications."},
+    {"question": "Who is in charge of student mentorship in the CSE (Data Science) department?", "answer": "Every faculty member mentors students, but you can also contact Ms. G. Vanaja or Mr. A. Ravindar for academic guidance."},
+    {"question": "How can I get academic support from faculty members?", "answer": "You can get support by:\nVisiting the faculty during office hours.\nSending an email with your queries.\nAttending scheduled study sessions."},
+    {"question": "What are the office hours for CSE (Data Science) faculty members?", "answer": "Faculty members are available Monday to Friday from 9:00 AM to 4:00 PM."},
+    {"question": "How can I contact a CSE (Data Science) faculty member?", "answer": "You can contact them via:\nOfficial email\nDepartment office visit\nStudent portal request"},
+    {"question": "Where is the CSE (Data Science) department located on campus?", "answer": "The department is located in [Building Name/Floor]. You can visit the office for any queries."},
+    {"question": "Who organizes student activities and technical events in the CSE (Data Science) department?", "answer": "Ms. G. Swetha and Mr. P. Vamshi Krishna coordinate hackathons, coding events, and student workshops."},
+    {"question": "How can I book an appointment with a faculty member?", "answer": "You can book an appointment by:\nSending an email to the faculty.\nVisiting the department office.\nUsing the student portal to request a slot."}
+]

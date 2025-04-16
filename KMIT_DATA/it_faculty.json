@@ -1,0 +1,81 @@
+{
+    "department": "Information Technology",
+    "faculty": {
+      "HOD": [
+        {
+          "name": "Dr. G. Narender",
+          "qualification": "Ph.D"
+        }
+      ],
+      "Assistant Professor": [
+        {
+          "name": "Ms. Pooja Godse",
+          "qualification": "M.Tech"
+        },
+        {
+          "name": "Ms. B. Manasa",
+          "qualification": "M.Tech"
+        },
+        {
+          "name": "Ms. Hima Bindu B",
+          "qualification": "M.Tech"
+        },
+        {
+          "name": "Mr. Y J V S Sharma",
+          "qualification": "M.Tech"
+        },
+        {
+          "name": "Ms. C. Rohini",
+          "qualification": "M.Tech"
+        },
+        {
+          "name": "Mr. G Govardhan",
+          "qualification": "M.Tech"
+        },
+        {
+          "name": "Mr. C Vikas",
+          "qualification": "M.Tech"
+        },
+        {
+          "name": "Ms. Nidhi Srivastav",
+          "qualification": "M.Tech"
+        },
+        {
+          "name": "Mrs. Rajitha",
+          "qualification": "M.Tech"
+        },
+        {
+          "name": "Mr. B Ashok",
+          "qualification": "M.Tech"
+        },
+        {
+          "name": "Mr. Rakeshreddy Gurrala",
+          "qualification": "M.Tech"
+        },
+        {
+          "name": "Ms. S. Swarajya Laxmi",
+          "qualification": "M.Tech"
+        },
+        {
+          "name": "Ms. Nikitha M",
+          "qualification": "M.Tech"
+        },
+        {
+          "name": "Ms. Himabindu S",
+          "qualification": "M.Tech"
+        },
+        {
+          "name": "Ms. Savitha Ramesh",
+          "qualification": "M.Tech"
+        },
+        {
+          "name": "Ms. G Soujanya",
+          "qualification": "M.Tech"
+        },
+        {
+          "name": "Ms. Y Sirisha",
+          "qualification": "M.Tech"
+        }
+      ]
+    }
+  }

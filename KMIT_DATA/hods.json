@@ -1,0 +1,23 @@
+{
+  "institute": "Keshav Memorial Institute of Technology",
+  "departments": {
+    "Computer Science & Engineering": {
+      "HOD": {
+        "name": "Dr. V. Aruna",
+        "qualification": "Ph.D"
+      }
+    },
+    "Computer Science & Engineering (AI & ML)": {
+      "HOD": {
+        "name": "Dr. T.V.G. Sridevi",
+        "qualification": "Ph.D"
+      }
+    },
+    "Information Technology": {
+      "HOD": {
+        "name": "Dr. G. Narender",
+        "qualification": "Ph.D"
+      }
+    }
+  }
+}

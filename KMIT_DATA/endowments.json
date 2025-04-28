@@ -1,0 +1,538 @@
+{
+    "Institution": {
+      "Name": "Keshav Memorial Institute of Technology (KMIT)",
+      "Address": "3-5-1026, Narayanguda, Hyderabad-500029, Telangana, India",
+      "Contact": {
+        "Email": "info@kmit.in",
+        "Phone": "040-23261407"
+      },
+      "Accreditation": {
+        "NAAC": "A Grade",
+        "NBA": "Accredited",
+        "AICTE": "Approved",
+        "Affiliation": "Jawaharlal Nehru Technological University Hyderabad (JNTUH)",
+        "Recognition": "Government of Telangana"
+      },
+      "EAPCET_Code": "KMIT",
+      "Established": 2007,
+      "PoweredBy": "Genesis Solutions Pvt Ltd"
+    },
+    "Courses": [
+      {
+        "Degree": "B.Tech",
+        "Program": "Computer Science & Engineering"
+      },
+      {
+        "Degree": "B.Tech",
+        "Program": "Computer Science & Engineering (AI & ML)"
+      },
+      {
+        "Degree": "B.Tech",
+        "Program": "Computer Science & Engineering (Data Science)"
+      },
+      {
+        "Degree": "B.Tech",
+        "Program": "Information Technology"
+      }
+    ],
+    "EndowmentAwards": {
+      "2024": [
+        {
+          "RollNumber": "20BD1A0511",
+          "Name": "Madhav Innani",
+          "AwardName": "Vidyalankar Vinayak Rao Koratkar",
+          "AwardFor": "CSE - Rank 1"
+        },
+        {
+          "RollNumber": "20BD1A054B",
+          "Name": "Anusha Reddy Bakaram",
+          "AwardName": "Vidyalankar Vinayak Rao Koratkar",
+          "AwardFor": "CSE - Rank 1"
+        },
+        {
+          "RollNumber": "20BD1A052G",
+          "Name": "Deepa Sree Chegireddy",
+          "AwardName": "Vidyalankar Vinayak Rao Koratkar",
+          "AwardFor": "CSE - Rank 3"
+        },
+        {
+          "RollNumber": "20BD1A1276",
+          "Name": "Swetha Bijja",
+          "AwardName": "Narayan Rao Pawar",
+          "AwardFor": "IT - Rank 1"
+        },
+        {
+          "RollNumber": "20BD1A1238",
+          "Name": "Madhava Rami Reddy Maramreddy",
+          "AwardName": "Narayan Rao Pawar",
+          "AwardFor": "IT - Rank 2"
+        },
+        {
+          "RollNumber": "20BD1A6666",
+          "Name": "Laxmi Priya Bingi",
+          "AwardName": "Keshav Rao Koratkar",
+          "AwardFor": "CSM - Rank 1"
+        },
+        {
+          "RollNumber": "20BD1A6642",
+          "Name": "Sai Likhita Rage",
+          "AwardName": "Keshav Rao Koratkar",
+          "AwardFor": "CSM - Rank 2"
+        },
+        {
+          "RollNumber": "20BD1A6735",
+          "Name": "Anjali Kotta",
+          "AwardName": "Justice Gopal Rao Ekbote",
+          "AwardFor": "CSD - Rank 1"
+        },
+        {
+          "RollNumber": "20BD1A6735",
+          "Name": "Anjali Kotta",
+          "AwardName": "Maharishi Dayanand Saraswati",
+          "AwardFor": "College Topper"
+        },
+        {
+          "RollNumber": "20BD1A1259",
+          "Name": "Lakshmi Harika Vadali",
+          "AwardName": "Smt. Jayashree Gogte",
+          "AwardFor": "Best Girl Student"
+        },
+        {
+          "RollNumber": "20BD1A6616",
+          "Name": "Shivananda Reddy Gumma",
+          "AwardName": "Dr Pandit Rao Palnitkar",
+          "AwardFor": "Best Outgoing Student"
+        },
+        {
+          "RollNumber": "20BD1A052B",
+          "Name": "Lahari Rajya Chodavarapu",
+          "AwardName": "Shri Hari Hara Sharma",
+          "AwardFor": "Best Orator"
+        }
+      ],
+      "2023": [
+        {
+          "RollNumber": "19BD1A0436",
+          "Name": "Nelaturu Rachana",
+          "AwardName": "Keshava Rao Koratkar",
+          "AwardFor": "ECE Topper"
+        },
+        {
+          "RollNumber": "19BD1A054B",
+          "Name": "Bodiga Rithwika",
+          "AwardName": "Vinayak Rao Vidyalankar Koratkar",
+          "AwardFor": "CSE Topper"
+        },
+        {
+          "RollNumber": "19BD1A1049",
+          "Name": "Sanjana Naga Chebiyyam",
+          "AwardName": "Justice Gopal Rao Ekbote",
+          "AwardFor": "EIE Topper"
+        },
+        {
+          "RollNumber": "19BD1A1249",
+          "Name": "Souderthi Raghavendra Prabhanjan",
+          "AwardName": "Narayan Rao Pawar",
+          "AwardFor": "IT Topper"
+        }
+      ],
+      "2022": [
+        {
+          "RollNumber": "18BD1A0446",
+          "Name": "Pandiri Sahithi",
+          "AwardName": "Keshava Rao Koratkar",
+          "AwardFor": "ECE Topper"
+        },
+        {
+          "RollNumber": "18BD1A052U",
+          "Name": "K Ruchitha",
+          "AwardName": "Vinayak Rao Vidyalankar Koratkar",
+          "AwardFor": "CSE Topper"
+        },
+        {
+          "RollNumber": "18BD1A1054",
+          "Name": "V S S Srikar Emany",
+          "AwardName": "Justice Gopal Rao Ekbote",
+          "AwardFor": "EIE Topper"
+        },
+        {
+          "RollNumber": "18BD1A1204",
+          "Name": "Bachu Bala Raju",
+          "AwardName": "Narayan Rao Pawar",
+          "AwardFor": "IT Topper"
+        }
+      ],
+      "2021": [
+        {
+          "RollNumber": "17BD1A0412",
+          "Name": "Chinmanolla Gowri Priya",
+          "AwardName": "Keshava Rao Koratkar",
+          "AwardFor": "ECE Topper"
+        },
+        {
+          "RollNumber": "17BD1A0599",
+          "Name": "Mungi Vyshnavi Reddy",
+          "AwardName": "Vinayak Rao Vidyalankar Koratkar",
+          "AwardFor": "CSE Topper"
+        },
+        {
+          "RollNumber": "17BD1A1017",
+          "Name": "Gaddam Navitha",
+          "AwardName": "Justice Gopal Rao Ekbote",
+          "AwardFor": "EIE Topper"
+        },
+        {
+          "RollNumber": "17BD1A1247",
+          "Name": "Petloju Joshna",
+          "AwardName": "Narayan Rao Pawar",
+          "AwardFor": "IT Topper"
+        }
+      ],
+      "2020": [
+        {
+          "RollNumber": "16BD1A0486",
+          "Name": "Pratapa Jayaram",
+          "AwardName": "Keshava Rao Koratkar",
+          "AwardFor": "ECE Topper"
+        },
+        {
+          "RollNumber": "16BD1A05CP",
+          "Name": "Uppula Swetha",
+          "AwardName": "Vinayak Rao Vidyalankar Koratkar",
+          "AwardFor": "CSE Topper"
+        },
+        {
+          "RollNumber": "16BD1A1046",
+          "Name": "Vakkanthula Maanasa",
+          "AwardName": "Justice Gopal Rao Ekbote",
+          "AwardFor": "EIE Topper"
+        },
+        {
+          "RollNumber": "16BD1A1232",
+          "Name": "Narra Sri Kavya Reddy",
+          "AwardName": "Narayan Rao Pawar",
+          "AwardFor": "IT Topper"
+        }
+      ],
+      "2019": [
+        {
+          "RollNumber": "15BD1A0440",
+          "Name": "Peri Venkata Gayathri",
+          "AwardName": "Maharishi Dayanand Saraswati",
+          "AwardFor": "College Topper"
+        },
+        {
+          "RollNumber": "15BD1A0440",
+          "Name": "Peri Venkata Gayathri",
+          "AwardName": "Keshava Rao Koratkar",
+          "AwardFor": "ECE A Topper"
+        },
+        {
+          "RollNumber": "15BD1A0485",
+          "Name": "Kongara Santhoshi",
+          "AwardName": "Keshava Rao Koratkar",
+          "AwardFor": "ECE B Topper"
+        },
+        {
+          "RollNumber": "15BD1A050N",
+          "Name": "S P Anusha",
+          "AwardName": "Vinayak Rao Vidyalankar Koratkar",
+          "AwardFor": "CSE A Topper"
+        },
+        {
+          "RollNumber": "15BD1A0531",
+          "Name": "Mysore Manaswini",
+          "AwardName": "Vinayak Rao Vidyalankar Koratkar",
+          "AwardFor": "CSE B Topper"
+        },
+        {
+          "RollNumber": "15BD1A054U",
+          "Name": "Chamarthi Sirisha",
+          "AwardName": "Vinayak Rao Vidyalankar Koratkar",
+          "AwardFor": "CSE C Topper"
+        },
+        {
+          "RollNumber": "15BD1A056Z",
+          "Name": "Shaik Simran",
+          "AwardName": "Vinayak Rao Vidyalankar Koratkar",
+          "AwardFor": "CSE D Topper"
+        },
+        {
+          "RollNumber": "15BD1A0591",
+          "Name": "Pandala Jahanavi",
+          "AwardName": "Vinayak Rao Vidyalankar Koratkar",
+          "AwardFor": "CSE E Topper"
+        },
+        {
+          "RollNumber": "15BD1A05AC",
+          "Name": "Golanakonda Srikanth",
+          "AwardName": "Vinayak Rao Vidyalankar Koratkar",
+          "AwardFor": "CSE F Topper"
+        },
+        {
+          "RollNumber": "15BD1A05D9",
+          "Name": "Prathyusha Gangapuram",
+          "AwardName": "Vinayak Rao Vidyalankar Koratkar",
+          "AwardFor": "CSE G Topper"
+        },
+        {
+          "RollNumber": "15BD1A1244",
+          "Name": "Navya Tubati",
+          "AwardName": "Narayan Rao Pawar",
+          "AwardFor": "IT Topper"
+        },
+        {
+          "RollNumber": "15BD1A1035",
+          "Name": "Likky Nitisha",
+          "AwardName": "Justice Gopal Rao Ekbote",
+          "AwardFor": "EIE Topper"
+        },
+        {
+          "RollNumber": "15BD1A058J",
+          "Name": "Meeta Kapoor",
+          "AwardName": "Smt. Jayashree Gogte",
+          "AwardFor": "Best Girl Student"
+        },
+        {
+          "RollNumber": "15BD1A0555",
+          "Name": "Evana Laxmi Priya",
+          "AwardName": "Dr. Pandit Rao Palnitkar",
+          "AwardFor": "Best Outgoing Student"
+        },
+        {
+          "RollNumber": "15BD1A05DN",
+          "Name": "Azamuddin Ansari",
+          "AwardName": "Hari Hara Sharma",
+          "AwardFor": "Best Orator"
+        }
+      ],
+      "2018": [
+        {
+          "RollNumber": "14BD1A1049",
+          "Name": "Priyanka Modani",
+          "AwardName": "Maharishi Dayanand Saraswati",
+          "AwardFor": "College Topper"
+        },
+        {
+          "RollNumber": "14BD1A0406",
+          "Name": "Bachu Abhilash",
+          "AwardName": "Keshava Rao Koratkar",
+          "AwardFor": "ECE 1st Rank"
+        },
+        {
+          "RollNumber": "14BD1A0452",
+          "Name": "S Bharat Bushan",
+          "AwardName": "Keshava Rao Koratkar",
+          "AwardFor": "ECE 2nd Rank"
+        },
+        {
+          "RollNumber": "14BD1A0455",
+          "Name": "Takkellapati Yamitha Surya",
+          "AwardName": "Keshava Rao Koratkar",
+          "AwardFor": "ECE 2nd Rank"
+        },
+        {
+          "RollNumber": "14BD1A05BV",
+          "Name": "Sagar Varma",
+          "AwardName": "Vinayak Rao Vidyalankar Koratkar",
+          "AwardFor": "CSE 1st Rank"
+        },
+        {
+          "RollNumber": "14BD1A058T",
+          "Name": "Munjuluru Vaishnavi",
+          "AwardName": "Vinayak Rao Vidyalankar Koratkar",
+          "AwardFor": "CSE 2nd Rank"
+        },
+        {
+          "RollNumber": "14BD1A058T",
+          "Name": "Munjuluru Vaishnavi",
+          "AwardName": "Vinayak Rao Vidyalankar Koratkar",
+          "AwardFor": "CSE 3rd Rank"
+        },
+        {
+          "RollNumber": "14BD1A1206",
+          "Name": "Amrutha Valli Salike",
+          "AwardName": "Narayan Rao Pawar",
+          "AwardFor": "IT 1st Rank"
+        },
+        {
+          "RollNumber": "14BD1A1201",
+          "Name": "A C Shreya Devi",
+          "AwardName": "Narayan Rao Pawar",
+          "AwardFor": "IT 2nd Rank"
+        },
+        {
+          "RollNumber": "14BD1A1203",
+          "Name": "Aitha Abhisarika",
+          "AwardName": "Narayan Rao Pawar",
+          "AwardFor": "IT 3rd Rank"
+        },
+        {
+          "RollNumber": "14BD1A1049",
+          "Name": "Priyanka Modani",
+          "AwardName": "Justice Gopal Rao Ekbote",
+          "AwardFor": "EIE 1st Rank"
+        },
+        {
+          "RollNumber": "14BD1A1026",
+          "Name": "Kasoju Rashmi",
+          "AwardName": "Justice Gopal Rao Ekbote",
+          "AwardFor": "EIE 2nd Rank"
+        },
+        {
+          "RollNumber": "14BD1A1001",
+          "Name": "A Laxmi Prasanna",
+          "AwardName": "Justice Gopal Rao Ekbote",
+          "AwardFor": "EIE 3rd Rank"
+        },
+        {
+          "RollNumber": "14BD1A052Q",
+          "Name": "Mallam Sripooja",
+          "AwardName": "Smt. Jayashree Gogte",
+          "AwardFor": "Best Girl Student"
+        },
+        {
+          "RollNumber": "14BD1A052S",
+          "Name": "Manisha Rao",
+          "AwardName": "Dr. Pandit Rao Palnitkar",
+          "AwardFor": "Best Outgoing Student"
+        },
+        {
+          "RollNumber": "14BD1A0521",
+          "Name": "Aurangabadkar Mohak",
+          "AwardName": "Hari Hara Sharma",
+          "AwardFor": "Best Orator"
+        }
+      ],
+      "2017": [
+        {
+          "RollNumber": "13BD1A0432",
+          "Name": "M Chandra Shekar",
+          "AwardName": "Maharishi Dayanand Saraswati",
+          "AwardFor": "College Topper"
+        },
+        {
+          "RollNumber": "13BD1A0432",
+          "Name": "M Chandra Shekar",
+          "AwardName": "Keshava Rao Koratkar",
+          "AwardFor": "ECE 1st Rank"
+        },
+        {
+          "RollNumber": "13BD1A0409",
+          "Name": "C Vimal",
+          "AwardName": "Keshava Rao Koratkar",
+          "AwardFor": "ECE 2nd Rank"
+        },
+        {
+          "RollNumber": "13BD1A0451",
+          "Name": "Tanushree Chungi",
+          "AwardName": "Keshava Rao Koratkar",
+          "AwardFor": "ECE 3rd Rank"
+        },
+        {
+          "RollNumber": "13BD1A0516",
+          "Name": "Gannu Saimatha",
+          "AwardName": "Vinayak Rao Vidyalankar Koratkar",
+          "AwardFor": "CSE 1st Rank"
+        },
+        {
+          "RollNumber": "13BD1A0517",
+          "Name": "Gundala Praveena",
+          "AwardName": "Vinayak Rao Vidyalankar Koratkar",
+          "AwardFor": "CSE 2nd Rank"
+        },
+        {
+          "RollNumber": "13BD1A0502",
+          "Name": "Akanksha Bodhankar",
+          "AwardName": "Vinayak Rao Vidyalankar Koratkar",
+          "AwardFor": "CSE 3rd Rank"
+        },
+        {
+          "RollNumber": "13BD1A1232",
+          "Name": "A Niyati Shah",
+          "AwardName": "Narayan Rao Pawar",
+          "AwardFor": "IT 1st Rank"
+        },
+        {
+          "RollNumber": "13BD1A1226",
+          "Name": "Mandavalli Durga Lavanya",
+          "AwardName": "Narayan Rao Pawar",
+          "AwardFor": "IT 2nd Rank"
+        },
+        {
+          "RollNumber": "13BD1A1211",
+          "Name": "Dodlapati Shailaja",
+          "AwardName": "Narayan Rao Pawar",
+          "AwardFor": "IT 3rd Rank"
+        },
+        {
+          "RollNumber": "13BD1A1003",
+          "Name": "Anirudh Nyalkalkar",
+          "AwardName": "Justice Gopal Rao Ekbote",
+          "AwardFor": "EIE 1st Rank"
+        },
+        {
+          "RollNumber": "13BD1A1004",
+          "Name": "Avasarala Sai Sruti Bala",
+          "AwardName": "Justice Gopal Rao Ekbote",
+          "AwardFor": "EIE 2nd Rank"
+        },
+        {
+          "RollNumber": "13BD1A1026",
+          "Name": "Lakshmi Lahari Duvvuri",
+          "AwardName": "Justice Gopal Rao Ekbote",
+          "AwardFor": "EIE 3rd Rank"
+        },
+        {
+          "RollNumber": "13BD1A0502",
+          "Name": "Akanksha Bodhankar",
+          "AwardName": "Smt. Jayashree Gogte",
+          "AwardFor": "Best Girl Student"
+        },
+        {
+          "RollNumber": "13BD1A0560",
+          "Name": "Yaddanapudi Sri Divya",
+          "AwardName": "Dr. Pandit Rao Palnitkar",
+          "AwardFor": "Best Outgoing Student"
+        },
+        {
+          "RollNumber": "13BD1A1238",
+          "Name": "Praharshita Krishna",
+          "AwardName": "Hari Hara Sharma",
+          "AwardFor": "Best Orator"
+        }
+      ]
+    },
+    "Achievements": [
+      {
+        "Student": "G. Hasini",
+        "Program": "AIML",
+        "Year": "3rd",
+        "Achievement": "Selected for BCCI Senior Women’s One Day Cricket Team"
+      },
+      {
+        "Student": "SreeLaya",
+        "Program": "IT",
+        "Batch": 2023,
+        "Achievement": "International offer with Amazon, Dublin, for 154,300 euros (1.2 cr INR)"
+      },
+      {
+        "Students": [
+          "Nischal Singhi",
+          "Srinivas Yadav",
+          "Akash Konda",
+          "P Sai Varshith"
+        ],
+        "Achievement": "Project proposals accepted by GSoC"
+      }
+    ],
+    "Events": [
+      {
+        "Type": "Webinar",
+        "Title": "Security and Privacy Issues in the World of Cryptocurrencies and Modern Mobile OSes",
+        "Date": "06th April 2024",
+        "OrganizedBy": ["CSE", "IT"],
+        "ResourcePerson": "Dr. Ankit Gangwal"
+      }
+    ]
+  }

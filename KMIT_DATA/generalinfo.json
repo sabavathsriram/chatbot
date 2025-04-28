@@ -1,0 +1,69 @@
+{
+  "college_name": "KMIT",
+  "timings": "9:30-4:30",
+  "founder": "Neil Gogte",
+  "principal": "Uma Maheshwari",
+  "nirf_ranking": {
+    "year": "2023-2024",
+    "rank": 840
+  },
+  "academic_director": "Deepa Ganu",
+  "blocks": [
+    {
+      "name": "A",
+      "purpose": "First year"
+    },
+    {
+      "name": "B",
+      "purpose": "Second year"
+    },
+    {
+      "name": "C",
+      "purpose": null
+    },
+    {
+      "name": "D",
+      "purpose": "Bhavisya Dwarh"
+    },
+    {
+      "name": "E",
+      "purpose": "Administration Block"
+    },
+    {
+      "name": "F",
+      "purpose": "IT block"
+    },
+    {
+      "name": "Granthalay",
+      "purpose": null
+    }
+  ],
+  "total_cse_students": 720,
+  "facilities": {
+    "hostel": false,
+    "bus": false
+  },
+  "campus_size": "approximately 80,000 square feet",
+  "total_faculty": 220,
+  "clubs": [
+    "Kreeda",
+    "Aakarshan",
+    "Mudra",
+    "Rotaract",
+    "NSS",
+    "Recurse",
+    "Vachan",
+    "Street-Cause",
+    "Organising Committee",
+    "Aalap",
+    "Alumni",
+    "Public-Relations",
+    "Riti",
+    "TracesOfLenses"
+  ],
+  "events": [
+    "Patang Utsav",
+    "KMIT-EVENING",
+    "Navaraas"
+  ]
+}

@@ -1,0 +1,181 @@
+{
+    "Institution": {
+      "Name": "Keshav Memorial Institute of Technology (KMIT)",
+      "Address": "3-5-1026, Narayanguda, Hyderabad-500029, Telangana, India",
+      "Contact": {
+        "Email": "info@kmit.in",
+        "Phone": "040-23261407"
+      },
+      "Accreditation": {
+        "NAAC": "A Grade",
+        "NBA": "Accredited",
+        "AICTE": "Approved",
+        "Affiliation": "Jawaharlal Nehru Technological University Hyderabad (JNTUH)",
+        "Recognition": "Government of Telangana"
+      },
+      "EAPCET_Code": "KMIT",
+      "Established": 2007,
+      "PoweredBy": "Genesis Solutions Pvt Ltd"
+    },
+    "Courses": [
+      {
+        "Degree": "B.Tech",
+        "Program": "Computer Science & Engineering"
+      },
+      {
+        "Degree": "B.Tech",
+        "Program": "Computer Science & Engineering (AI & ML)"
+      },
+      {
+        "Degree": "B.Tech",
+        "Program": "Computer Science & Engineering (Data Science)"
+      },
+      {
+        "Degree": "B.Tech",
+        "Program": "Information Technology"
+      }
+    ],
+    "AcademicRegulations": {
+      "Overview": {
+        "Responsibility": "Departments handle teaching, research, and industrial consultancy",
+        "Structure": "Semester-based with English as the medium of instruction",
+        "Evaluation": {
+          "ContinuousInternalEvaluation": "CIE",
+          "SemesterEndExamination": "SEE",
+          "Description": "Continuous evaluation with a minimum of 17 weeks of instruction per semester"
+        },
+        "Activities": [
+          "Co-curricular activities",
+          "Extra Mural Lecture series",
+          "Conferences, symposia, workshops",
+          "Guest lectures",
+          "Industrial visits"
+        ],
+        "Monitoring": "Managed by Dean Academic Affairs through academic calendar, timetables, examination schedules, and college diary"
+      },
+      "BTechRegulations": [
+        {
+          "Name": "KR24",
+          "Description": "B.Tech KR24 Academic Regulations (Autonomous)"
+        },
+        {
+          "Name": "KR23",
+          "Description": "B.Tech KR23 Academic Regulations (Autonomous)"
+        },
+        {
+          "Name": "KR21",
+          "Description": "B.Tech KR21 Academic Regulations (Autonomous)"
+        },
+        {
+          "Name": "KR20",
+          "Description": "B.Tech KR20 Academic Regulations (Autonomous)"
+        },
+        {
+          "Name": "R18",
+          "Description": "B.Tech R18 Academic Regulations"
+        },
+        {
+          "Name": "R16",
+          "Description": "B.Tech R16 Academic Regulations"
+        },
+        {
+          "Name": "R15",
+          "Description": "B.Tech R15 Academic Regulations"
+        },
+        {
+          "Name": "R13",
+          "Description": "B.Tech R13 Academic Regulations"
+        }
+      ],
+      "YearWiseRegulations": [
+        {
+          "AcademicYear": "2024-25",
+          "I_Year": "KR24",
+          "II_Year": "KR23",
+          "III_Year": "KR21",
+          "IV_Year": "KR21"
+        },
+        {
+          "AcademicYear": "2023-24",
+          "I_Year": "KR23",
+          "II_Year": "KR21",
+          "III_Year": "KR21",
+          "IV_Year": "KR20"
+        },
+        {
+          "AcademicYear": "2022-23",
+          "I_Year": "KR21",
+          "II_Year": "KR21",
+          "III_Year": "KR20",
+          "IV_Year": "R18"
+        },
+        {
+          "AcademicYear": "2021-22",
+          "I_Year": "KR21",
+          "II_Year": "KR20",
+          "III_Year": "R18",
+          "IV_Year": "R18"
+        },
+        {
+          "AcademicYear": "2020-21",
+          "I_Year": "KR20",
+          "II_Year": "R18",
+          "III_Year": "R18",
+          "IV_Year": "R16"
+        },
+        {
+          "AcademicYear": "2019-20",
+          "I_Year": "R18",
+          "II_Year": "R18",
+          "III_Year": "R16",
+          "IV_Year": "R16"
+        },
+        {
+          "AcademicYear": "2018-19",
+          "I_Year": "R18",
+          "II_Year": "R16",
+          "III_Year": "R16",
+          "IV_Year": "R15"
+        },
+        {
+          "AcademicYear": "2017-18",
+          "I_Year": "R16",
+          "II_Year": "R16",
+          "III_Year": "R15",
+          "IV_Year": "R13"
+        }
+      ]
+    },
+    "Achievements": [
+      {
+        "Student": "G. Hasini",
+        "Program": "AIML",
+        "Year": "3rd",
+        "Achievement": "Selected for BCCI Senior Women’s One Day Cricket Team"
+      },
+      {
+        "Student": "SreeLaya",
+        "Program": "IT",
+        "Batch": 2023,
+        "Achievement": "International offer with Amazon, Dublin, for 154,300 euros (1.2 cr INR)"
+      },
+      {
+        "Students": [
+          "Nischal Singhi",
+          "Srinivas Yadav",
+          "Akash Konda",
+          "P Sai Varshith"
+        ],
+        "Achievement": "Project proposals accepted by GSoC"
+      }
+    ],
+    "Events": [
+      {
+        "Type": "Webinar",
+        "Title": "Security and Privacy Issues in the World of Cryptocurrencies and Modern Mobile OSes",
+        "Date": "06th April 2024",
+        "OrganizedBy": ["CSE", "IT"],
+        "ResourcePerson": "Dr. Ankit Gangwal"
+      }
+    ]
+  }

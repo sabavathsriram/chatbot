@@ -10,14 +10,21 @@ from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain.docstore.document import Document
 import logging
+import time
 from typing import List, Dict
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title="KMIT Chatbot", description="Chatbot for KMIT queries")
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+app = FastAPI(title="KMIT Chatbot", description="Chatbot for KMIT queries using RAG with Gemini AI")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 DATA_DIR = "kmit_data"
 PERSIST_DIR = os.path.join(os.getcwd(), "db")
@@ -33,9 +40,8 @@ def check_disk_space(path):
 
 check_disk_space(os.path.dirname(PERSIST_DIR))
 
-# Process JSON
-def process_json(data: Dict) -> List[Dict]:
-    items = []
+# Process JSON with larger chunks
+def process_json(data: Dict, chunk_size=500) -> List[Dict]:
     def flatten(d, prefix=""):
         content = []
         for key, value in d.items():
@@ -44,18 +50,32 @@ def process_json(data: Dict) -> List[Dict]:
                 content.extend(flatten(value, new_key))
             elif isinstance(value, list):
                 for i, v in enumerate(value):
-                    content.extend(flatten({f"{new_key}_{i}": v}))
+                    content.extend(flatten({f"{new_key}_{i}": v}, new_key))
             else:
                 content.append(f"{new_key}: {str(value)}")
         return content
+    
+    def chunk_text(text):
+        words = text.split()
+        return [' '.join(words[i:i + chunk_size]) for i in range(0, len(words), chunk_size)]
+    
+    items = []
     if isinstance(data, dict):
-        items.append({"fields": flatten(data), "raw": data})
+        flat_content = flatten(data)
+        for text in flat_content:
+            chunks = chunk_text(text)
+            for chunk in chunks:
+                items.append({"fields": [chunk], "raw": {prefix: value for prefix, value in [line.split(": ", 1) for line in [text]]}})
     elif isinstance(data, list):
         for i, item in enumerate(data):
-            items.append({"fields": flatten({f"item_{i}": item}), "raw": item})
+            flat_content = flatten({f"item_{i}": item})
+            for text in flat_content:
+                chunks = chunk_text(text)
+                for chunk in chunks:
+                    items.append({"fields": [chunk], "raw": {f"item_{i}": item}})
     return items
 
-# Load documents
+# Load and process documents from JSON files
 documents = []
 for filename in os.listdir(DATA_DIR):
     if filename.endswith(".json"):
@@ -65,20 +85,21 @@ for filename in os.listdir(DATA_DIR):
                 data = json.load(f)
                 category = "General"
                 fn_lower = filename.lower()
-                if "admission" in fn_lower or "eapcet" in fn_lower or "ecet" in fn_lower:
+                if "admissions" in fn_lower or "eapcet" in fn_lower or "ecet" in fn_lower:
                     category = "Admissions"
-                elif "placement" in fn_lower:
+                elif "placements" in fn_lower:
                     category = "Placements"
                 elif "faculty" in fn_lower or "hods" in fn_lower:
                     category = "Faculty"
-                elif "facilit" in fn_lower or "sport" in fn_lower or "library" in fn_lower or "infrastructure" in fn_lower or "labs" in fn_lower:
+                elif "infrastructure" in fn_lower or "facilities" in fn_lower or "sports" in fn_lower or "library" in fn_lower:
                     category = "Campus Facilities"
-                elif "regulation" in fn_lower or "autonomous" in fn_lower:
-                    category = "Regulations"
-                elif "event" in fn_lower or "notification" in fn_lower:
-                    logger.info(f"Skipping Notifications file: {filename}")
-                    continue
-                
+                elif "regulations" in fn_lower or "autonomous" in fn_lower:
+                    category = "Exams & Regulations"
+                elif "courses" in fn_lower or "syllabi" in fn_lower:
+                    category = "Courses"
+                elif "administration" in fn_lower or "generalinfo" in fn_lower:
+                    category = "Administration"
+
                 groups = process_json(data)
                 for group in groups:
                     content = "\n".join(group["fields"])
@@ -86,7 +107,7 @@ for filename in os.listdir(DATA_DIR):
                         logger.warning(f"Empty content in {filename}")
                         continue
                     keywords = " ".join(set(word for line in group["fields"] for word in line.lower().split()))
-                    keywords += f" {category.lower()} kmit admissions fees eapcet ecet lateral entry tuition special nba contact placements highest salary average salary students placed companies visited offers campus facilities sports library gym badminton basketball football volleyball yoga auditorium labs granthalaya training tournaments regulations autonomous jntuh courses"
+                    keywords += f" {category.lower()} kmit {category.replace(' & ', ' ').replace('Exams', 'exam').replace('Regulations', 'regulation')}"
                     metadata = {
                         "source": filename,
                         "category": category,
@@ -94,7 +115,7 @@ for filename in os.listdir(DATA_DIR):
                         "raw_data": json.dumps(group["raw"])
                     }
                     documents.append(Document(page_content=content, metadata=metadata))
-                logger.info(f"Loaded {filename}: {len(groups)} documents, category {category}")
+                logger.info(f"Loaded {filename}: {len(groups)} chunks, category {category}, sample content: {content[:100]}...")
         except Exception as e:
             logger.error(f"Error in {filename}: {e}")
 
@@ -111,22 +132,14 @@ try:
     if doc_count == 0:
         logger.info("Empty ChromaDB, rebuilding...")
         if os.path.exists(PERSIST_DIR):
-            try:
-                shutil.rmtree(PERSIST_DIR)
-                logger.info("Cleared existing ChromaDB")
-            except (PermissionError, OSError) as e:
-                logger.warning(f"Cannot clear db/: {e}. Creating new...")
-        os.makedirs(PERSIST_DIR, exist_ok=True)
-        vectordb = Chroma.from_documents(documents, embedding, persist_directory=PERSIST_DIR, collection_name="kmit")
-except Exception as e:
-    logger.info(f"ChromaDB load failed ({e}), creating new...")
-    if os.path.exists(PERSIST_DIR):
-        try:
             shutil.rmtree(PERSIST_DIR)
             logger.info("Cleared existing ChromaDB")
-        except (PermissionError, OSError) as e:
-            logger.warning(f"Cannot clear db/: {e}")
-    os.makedirs(PERSIST_DIR, exist_ok=True)
+        vectordb = Chroma.from_documents(documents, embedding, persist_directory=PERSIST_DIR, collection_name="kmit")
+except Exception as e:
+    logger.error(f"ChromaDB load failed ({e}), creating new...")
+    if os.path.exists(PERSIST_DIR):
+        shutil.rmtree(PERSIST_DIR)
+        logger.info("Cleared existing ChromaDB")
     vectordb = Chroma.from_documents(documents, embedding, persist_directory=PERSIST_DIR, collection_name="kmit")
 
 logger.info(f"ChromaDB: {vectordb._collection.count()} documents")
@@ -134,29 +147,31 @@ if vectordb._collection.count() == 0:
     logger.error("Failed to index documents!")
     raise RuntimeError("ChromaDB indexing failed")
 
-# Gemini API
-GEMINI_API_KEY = "AIzaSyDqpJweZrDuBdeC8REuVk9p3kqUMCB1PCs"  # Replace with valid key
+# Gemini API with retry logic
+GEMINI_API_KEY = "AIzaSyCqhE0zaP4Ot3RviLKomupYDnmrYMXrs30"  # Replace with valid key
 GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent"
 
-def call_gemini_api(prompt: str) -> str:
-    if not GEMINI_API_KEY:
-        logger.error("No Gemini API key provided")
-        return "Gemini API key missing, cannot process query."
+def call_gemini_api(prompt: str, max_retries=3) -> str:
     headers = {"Content-Type": "application/json"}
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {"maxOutputTokens": 500, "temperature": 0.005}
+        "generationConfig": {"maxOutputTokens": 2000, "temperature": 0.005}
     }
-    try:
-        response = requests.post(f"{GEMINI_API_URL}?key={GEMINI_API_KEY}", headers=headers, json=payload, timeout=15)
-        response.raise_for_status()
-        return response.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
-    except requests.exceptions.HTTPError as e:
-        logger.error(f"Gemini HTTP error: {e}")
-        return "Gemini API error, please try again."
-    except Exception as e:
-        logger.error(f"Gemini error: {e}")
-        return None
+    for attempt in range(max_retries):
+        try:
+            response = requests.post(f"{GEMINI_API_URL}?key={GEMINI_API_KEY}", headers=headers, json=payload, timeout=15)
+            response.raise_for_status()
+            return response.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Gemini API attempt {attempt + 1} failed: {e}")
+            if attempt < max_retries - 1:
+                time.sleep(2 ** attempt)  # Exponential backoff
+            else:
+                return f"API error after {max_retries} attempts: {str(e)}. Please try again later."
+        except (KeyError, IndexError) as e:
+            logger.error(f"Gemini API parsing error: {e}")
+            return "Error processing the query due to API response issue."
+    return "Unexpected error in API call."
 
 # Query model
 class QueryModel(BaseModel):
@@ -164,173 +179,86 @@ class QueryModel(BaseModel):
 
 GREETINGS = {"hi", "hello", "hey", "greetings"}
 
-# Search documents
-def hybrid_search(query: str, category: str, source_hint: str = None, k: int = 60) -> List[Document]:
+# Search documents with broad retrieval
+def hybrid_search(query: str, category: str, source_hint: str = None, k: int = 80) -> List[Document]:
+    expanded_query = f"{query.lower()} kmit what where when about details info"
+    category_keywords = {
+        "admissions": "eligibility eapcet ecet lateral entry tuition fees contact fee structure seats",
+        "courses": "offered btech cse csm data science it programs intake",
+        "faculty": "members csm hod phd mtech professors staff",
+        "exams & regulations": "schedule syllabus regulations autonomous exam dates",
+        "placements": "salary package students placed companies offers intuit ctc job",
+        "campus facilities": "library sports gym auditorium badminton football chess table tennis caroms volleyball basketball hostel bus timings",
+        "administration": "principal location departments founder ranking timing blocks college timings campus size about where"
+    }
+    if category in category_keywords:
+        expanded_query += f" {category_keywords[category]}"
+    
     try:
-        # Query expansion
-        expanded_query = query.lower()
-        if any(x in expanded_query for x in ["admission", "fees", "eapcet", "ecet", "strucrure", "tuition", "eligibility", "contact"]):
-            expanded_query += " admissions eligibility eapcet ecet lateral entry tuition special nba contact fees structure"
-        elif any(x in expanded_query for x in ["placement", "salary", "package", "placed", "offers", "ctc", "highest", "average", "companies", "students"]):
-            expanded_query += " placements highest salary average salary students placed students registered companies visited offers ctc year"
-        elif any(x in expanded_query for x in ["campus", "facilit", "library", "sport", "gym", "labs", "badminton", "football", "basketball", "yoga", "auditorium"]):
-            expanded_query += " campus facilities sports library gym badminton basketball football volleyball yoga auditorium labs granthalaya training tournaments"
-        elif any(x in expanded_query for x in ["regulation", "autonomous", "semester"]):
-            expanded_query += " regulations autonomous semester cie see kr24 kr23 kr21 kr20"
         results = vectordb.similarity_search(expanded_query, k=k)
-        # Prioritize by category and source
-        seen_content = set()
-        prioritized = []
-        for doc in results:
-            if (doc.metadata["category"] == category or (source_hint and source_hint in doc.metadata["source"])) and doc.page_content not in seen_content:
-                prioritized.append(doc)
-                seen_content.add(doc.page_content)
-        for doc in results:
-            if doc.page_content not in seen_content:
-                prioritized.append(doc)
-                seen_content.add(doc.page_content)
-        logger.info(f"Search '{query}' (expanded: '{expanded_query}', category: {category}, source_hint: {source_hint}): {len(prioritized)} results from {', '.join(set(doc.metadata['source'] for doc in prioritized))}")
-        return prioritized[:30]
+        logger.info(f"Search '{query}' (expanded: '{expanded_query[:100]}...'): {len(results)} results")
+        return results
     except Exception as e:
         logger.error(f"Search error: {e}")
         return []
 
-# Extract answer
+# Extract answer with comprehensive context
 def extract_answer(query: str, results: List[Document]) -> str:
-    context = "\n".join(list(dict.fromkeys(doc.page_content for doc in results)))
-    if not context.strip():
+    if not results:
         return "I don’t have enough information to answer this. Please contact info@kmit.in."
+    
+    # Use all retrieved context
+    full_context = "\n".join(doc.page_content for doc in results)
+    if not full_context.strip():
+        return "I don’t have enough information to answer this. Please contact info@kmit.in."
+    
+    context_lines = full_context.count('\n') + 1
+    logger.info(f"Full context sample: {full_context[:200]}...")
     prompt = f"""
-    You are a KMIT chatbot competing to deliver 100% accurate answers from JSON files for Admissions, Placements, and Campus Facilities queries. Answer using only the provided context, matching data exactly. Do not invent, generalize, or add external details. If the context lacks a clear answer, say: "I don’t have enough information to answer this. Please contact info@kmit.in."
+    You are a KMIT chatbot using RAG with Gemini AI. Answer the query: '{query}' by compiling and presenting ALL relevant information from the provided context, which is derived from JSON files in kmit_data. Include every detail related to the query, even if incomplete or scattered across the context. For general queries (e.g., 'what is kmit', 'where is kmit'), summarize all applicable data about KMIT. Avoid inventing or generalizing beyond the context, and use the fallback message ('I don’t have enough information to answer this. Please contact info@kmit.in.') only if no relevant data is present. Match the query to these categories and include all data:
+    - Admissions: Eligibility, entrance tests, seat allocation, lateral entry, fees, contact.
+    - Courses: All courses offered and intake details.
+    - Faculty: All faculty names, titles, and qualifications.
+    - Exams & Regulations: All exam schedules or regulations.
+    - Placements: All placement stats (companies, offers, salaries) for all batches.
+    - Campus Facilities: All data for library, sports, gym, auditorium, timings.
+    - Administration: All data for principal, location, departments, founder, ranking, timing, blocks.
     Context:
-    {context[:6000]}
-    Query: {query}
-    Instructions:
-    - Answer concisely, using exact context data from JSON files.
-    - For admissions queries (e.g., 'admissions,' 'fees,' 'eligibility,' 'eapcet,' 'contact'), include eligibility (10+2 with Mathematics, Physics, Chemistry, EAPCET), seat allocation (70% EAPCET, 30% Management/NRI), lateral entry (20% via ECET, second year), fee structure (all years, exact figures: Year I: Tuition ₹103,000, Special ₹5,500, NBA ₹3,000; Years II-IV: Tuition ₹103,000, Special ₹2,500, NBA ₹3,000), contact (6302140205).
-    - For placement queries (e.g., 'placements,' 'salary,' 'package,' 'placed,' 'offers'), include full stats if general (2023-2024, 103 companies, 662 offers, 557 registered, 511 placed, 9.69 LPA average, 49.8 LPA highest by Intuit) or specific metrics:
-      - 'highest salary,' 'highest package,' 'highest placement,' 'highest ctc': Return '49.8 LPA by Intuit, 2023-2024.'
-      - 'who got highest salary': Return student name if available (e.g., SreeLaya); else, 'No student name provided.'
-      - 'average salary,' 'average package': Return '9.69 LPA, 2023-2024.'
-      - 'students placed,' 'total number of students placed,' 'secured placements': Return '511 students were placed in the 2023-2024 batch.'
-      - 'companies visited': Return '103 companies visited in the 2023-2024 batch.'
-      - 'offers': Return '662 offers were rolled out in the 2023-2024 batch.'
-    - For campus facilities queries (e.g., 'campus,' 'facilities,' 'sports,' 'library,' 'gym'), include indoor sports (badminton: professional-standard court behind Block B, annual competitions; yoga: daily coaching 4-5:30 pm; chess, table tennis, caroms: dedicated rooms above auditorium, intra-college tournaments), outdoor sports (football: large field, daily coaching, 12-member team, three intra-college events; basketball: professional-standard court, tournaments at BITS Hyderabad 24-27 Jan 2019, Vidya Jyothi 2-3 Apr 2019, KMIT hosted 17-18 Jan 2015; volleyball: field next to basketball court, daily coaching, intra-college events), library (KMIT Granthalaya, hours/resources if available), gym (faculty use 3:30-4:45 pm), auditorium, training (basketball, taekwondo, volleyball, kabaddi, inter-branch tournaments, proposed inter-collegiate basketball tournaments, fitness training twice weekly, inter-class competitions 2-3 times yearly).
-    - For specific facility queries:
-      - 'sports,' 'sports facility': List all indoor and outdoor sports, training, tournaments.
-      - 'library': Return 'KMIT Granthalaya' with hours/resources if available, else clarify.
-      - 'labs,' 'laboratories': Provide lab details if available, else clarify.
-      - 'gym,' 'auditorium': Return specific details (e.g., gym hours, auditorium availability).
-    - Handle typos (e.g., 'strucrure' for 'structure,' 'placemsnts' for 'placements') by mapping to correct terms.
-    - For numerical queries (e.g., 'how many students placed,' 'fee amount'), extract exact numbers (e.g., 511, ₹103,000).
-    - Use full department names (e.g., Computer Science & Engineering).
-    - Ensure salary figures are precise (e.g., 49.8 LPA, 9.69 LPA with year).
-    - Exclude unrelated data (e.g., no company name for 'who got highest salary').
-    - Clarify incomplete data (e.g., no library hours, no student name).
+    {full_context}
     Answer:
     """
-    logger.info(f"Processing query: {query} with context from {', '.join(set(doc.metadata['source'] for doc in results))}")
-    response = call_gemini_api(prompt)
-    return response if response else "I don’t have enough information to answer this. Please contact info@kmit.in."
-
-# Preprocess query
-def preprocess_query(query: str) -> str:
-    query = query.strip().lower()
-    synonyms = [
-        ("admissions", "admission details"),
-        ("admission", "admission details"),
-        ("fee strucrure", "admission fees"),
-        ("fee structure", "admission fees"),
-        ("fees", "admission fees"),
-        ("tuition", "admission fees"),
-        ("eligibility", "admission eligibility"),
-        ("eapcet", "admission eligibility"),
-        ("ecet", "admission eligibility"),
-        ("lateral entry", "admission eligibility"),
-        ("contact", "admission contact"),
-        ("placements", "placement statistics"),
-        ("placemsnts", "placement statistics"),
-        ("highest salary", "placement highest salary"),
-        ("highest package", "placement highest salary"),
-        ("highest placement", "placement highest salary"),
-        ("highest ctc", "placement highest salary"),
-        ("who got highest salary", "placement highest salary student"),
-        ("which student got highest salary", "placement highest salary student"),
-        ("average salary", "placement average salary"),
-        ("average package", "placement average salary"),
-        ("students placed", "placement students placed"),
-        ("total number of students placed", "placement students placed"),
-        ("secured placements", "placement students placed"),
-        ("got placements", "placement students placed"),
-        ("how many students placed", "placement students placed"),
-        ("companies visited", "placement companies visited"),
-        ("offers", "placement offers"),
-        ("campus facilities", "campus infrastructure"),
-        ("facilities", "campus infrastructure"),
-        ("campus", "campus infrastructure"),
-        ("sports", "campus sports"),
-        ("sports facility", "campus sports"),
-        ("does kmit provide any sports facility", "campus sports"),
-        ("library", "campus library"),
-        ("labs", "campus labs"),
-        ("laboratories", "campus labs"),
-        ("does kmit provide any labs facility", "campus labs"),
-        ("gym", "campus gym"),
-        ("auditorium", "campus auditorium"),
-        ("tournaments", "campus sports"),
-        ("badminton", "campus sports"),
-        ("football", "campus sports"),
-        ("basketball", "campus sports"),
-        ("volleyball", "campus sports"),
-        ("yoga", "campus sports"),
-        ("regulations of kmit", "academic regulations"),
-        ("is kmit autonomous", "autonomous status"),
-        ("courses offered in kmit", "courses offered"),
-    ]
-    for key, value in synonyms:
-        if key in query:
-            query = query.replace(key, value)
-            break
-    return query
+    logger.info(f"Processing query: {query} with context from {len(results)} documents (total {context_lines} lines)")
+    return call_gemini_api(prompt)
 
 @app.post("/query/")
 async def fetch_answer(request: QueryModel):
-    query_text = preprocess_query(request.query)
-    logger.info(f"Processed query: {query_text}")
+    query_text = request.query.strip().lower()
+    logger.info(f"Received query: {query_text}")
 
     if query_text in GREETINGS:
-        return {"answer": "Hello! I’m your KMIT assistant. Ask me about admissions, placements, campus facilities, or more!"}
+        return {"answer": "Hello! I’m your KMIT chatbot. Ask me about admissions, courses, faculty, exams, placements, campus facilities, or administration!"}
 
     try:
-        # Category and source hint
+        # Broad category detection
         category = "General"
         source_hint = None
         categories = {
-            "admission details": ("Admissions", "admissions.json"),
-            "admission fees": ("Admissions", "admissions.json"),
-            "admission eligibility": ("Admissions", "admissions.json"),
-            "admission contact": ("Admissions", "admissions.json"),
-            "placement statistics": ("Placements", "placements.json"),
-            "placement highest salary": ("Placements", "placements.json"),
-            "placement highest salary student": ("Placements", "placements.json"),
-            "placement average salary": ("Placements", "placements.json"),
-            "placement students placed": ("Placements", "placements.json"),
-            "placement companies visited": ("Placements", "placements.json"),
-            "placement offers": ("Placements", "placements.json"),
-            "campus infrastructure": ("Campus Facilities", "infrastructure.json"),
-            "campus sports": ("Campus Facilities", "infrastructure.json"),
-            "campus library": ("Campus Facilities", "infrastructure.json"),
-            "campus labs": ("Campus Facilities", "infrastructure.json"),
-            "campus gym": ("Campus Facilities", "infrastructure.json"),
-            "campus auditorium": ("Campus Facilities", "infrastructure.json"),
-            "academic regulations": ("Regulations", "regu.json"),
-            "autonomous status": ("Regulations", "regu.json"),
-            "courses offered": ("General", None),
+            "admissions": ("Admissions", "admissions.json"),
+            "courses": ("Courses", "vas.json"),
+            "faculty": ("Faculty", "csm_faculty.json"),
+            "exams": ("Exams & Regulations", "regu.json"),
+            "placements": ("Placements", "placements.json"),
+            "facilities": ("Campus Facilities", "infrastructure.json"),
+            "administration": ("Administration", "generalinfo.json"),
+            
         }
-        for key, (cat, src) in categories.items():
-            if key in query_text:
-                category = cat
-                source_hint = src
+        for key in categories.keys():
+            if key in query_text or (key == "facilities" and any(word in query_text for word in ["library", "sports", "gym", "auditorium", "timings"])) or \
+               (key == "placements" and any(word in query_text for word in ["salary", "placement", "job", "company"])) or \
+               (key == "admissions" and any(word in query_text for word in ["fee", "eligibility", "contact", "seat"])) or \
+               (key == "administration" and any(word in query_text for word in ["principal", "founder", "timing", "blocks", "ranking", "where", "what"])):
+                category = categories[key][0]
+                source_hint = categories[key][1]
                 break
 
         results = hybrid_search(query_text, category, source_hint)
@@ -344,9 +272,9 @@ async def fetch_answer(request: QueryModel):
 
     except Exception as e:
         logger.error(f"Query error: {e}")
-        return {"answer": "Something went wrong. Please contact info@kmit.in."}
+        return {"answer": f"Something went wrong: {str(e)}. Please try again or contact info@kmit.in."}
 
-if __name__ == "__main__":
+if __name__ == "_main_":
     import uvicorn
     try:
         uvicorn.run(app, host="0.0.0.0", port=8001)

@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken');
 
-const createTokenForUser = (user) => {
-    return jwt.sign(
-        { id: user._id, email: user.email, username: user.username },
-        "your_secret_key",
-        { expiresIn: "1h" }
-    );
-};
+     function createTokenForUser(user) {
+         const payload = {
+             _id: user._id,
+             username: user.username,
+             email: user.email
+         };
+         return jwt.sign(payload, 'your_jwt_secret', { expiresIn: '1h' }); // Replace with your JWT secret
+     }
 
-module.exports = { createTokenForUser };
+     module.exports = { createTokenForUser };

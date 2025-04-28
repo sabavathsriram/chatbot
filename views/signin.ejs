@@ -3,133 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Sign In - VIDYASAARATHI</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
         body {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background: #b2f0eb;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f0f2f5, #e1e7f0);
         }
         .container {
-            display: flex;
-            width: 800px;
-            height: 450px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
             background: white;
-        }
-        .left {
-            width: 50%;
-            padding: 40px;
-            background: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .left h2 {
-            margin-bottom: 20px;
-        }
-        .input-group {
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             width: 100%;
-            margin-bottom: 15px;
+            max-width: 400px;
+            animation: fadeIn 0.5s ease-in;
         }
-        .input-group input {
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        label {
+            display: block;
+            color: #555;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        input {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #333;
+        }
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #555;
             font-size: 16px;
         }
-        .forgot-password {
-            text-align: right;
-            width: 100%;
-            margin-top: 5px;
-        }
-        .forgot-password a {
-            color: #007BFF;
-            font-size: 14px;
-            text-decoration: none;
-        }
-        .btn {
+        button {
             width: 100%;
             padding: 12px;
+            background: #333;
+            color: white;
             border: none;
-            border-radius: 5px;
-            background: #007BFF;
-            color: white;
-            font-size: 18px;
+            border-radius: 8px;
+            font-size: 16px;
             cursor: pointer;
-            margin-top: 10px;
+            transition: background 0.3s;
+            position: relative;
         }
-        .right {
-            width: 50%;
-            background: linear-gradient(135deg, #0099cc, #00cc99);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        button:hover {
+            background: #555;
+        }
+        button:disabled {
+            background: #999;
+            cursor: not-allowed;
+        }
+        .loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #fff;
+            border-top: 3px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .error {
+            color: #d32f2f;
             text-align: center;
-            padding: 40px;
-        }
-        .btn-outline {
-            background: transparent;
-            border: 2px solid white;
-            padding: 12px 30px;
-            color: white;
-            cursor: pointer;
+            margin-bottom: 15px;
+            font-size: 14px;
+            background: #ffebee;
+            padding: 10px;
             border-radius: 5px;
-            font-size: 18px;
-            transition: 0.3s;
         }
-        .btn-outline:hover {
-            background: white;
-            color: #0099cc;
+        .link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #555;
         }
-        @media (max-width: 768px) {
+        .link a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .link a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 480px) {
             .container {
-                flex-direction: column;
-                height: auto;
+                padding: 20px;
+                margin: 10px;
             }
-            .left, .right {
-                width: 100%;
-                padding: 30px;
+            h2 {
+                font-size: 20px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="left">
-            <h2>Sign In</h2>
-            <form action="/signin" method="POST">
-                <div class="input-group">
-                    <input type="text" name="login" required placeholder="Username or Email">
-                </div>
-                <div class="input-group">
-                    <input type="password" name="password" required placeholder="Password">
-                </div>
-                <button type="submit" class="btn">Sign In</button>
-            </form>
-            
-        </div>
-        <div class="right">
-            <h2>Hello, Friend!</h2>
-            <p>Enter your personal details and start your journey with us</p>
-            <form action="/signup" method="GET">
-                <button type="submit" class="btn-outline">Sign Up</button>
-            </form>
+        <h2>Sign In to VIDYASAARATHI</h2>
+        <% if (locals.error) { %>
+            <p class="error"><%= error %></p>
+        <% } %>
+        <form id="signinForm" action="/signin" method="POST">
+            <div class="form-group">
+                <label for="login">Username or Email</label>
+                <input type="text" id="login" name="login" required autocomplete="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required autocomplete="current-password">
+                <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+            </div>
+            <button type="submit" id="submitBtn">Sign In</button>
+        </form>
+        <div class="link">
+            <p>Don't have an account? <a href="/signup">Sign Up</a></p>
         </div>
     </div>
+
+    <script>
+        const passwordInput = document.getElementById('password');
+        const togglePassword = document.getElementById('togglePassword');
+        const submitBtn = document.getElementById('submitBtn');
+        const form = document.getElementById('signinForm');
+
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            togglePassword.classList.toggle('fa-eye');
+            togglePassword.classList.toggle('fa-eye-slash');
+        });
+
+        form.addEventListener('submit', () => {
+            submitBtn.disabled = true;
+            submitBtn.classList.add('loading');
+            submitBtn.textContent = 'Signing In...';
+        });
+    </script>
 </body>
 </html>

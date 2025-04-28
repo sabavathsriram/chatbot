@@ -1,20 +1,21 @@
-const {validateToken}=require("../services/authentication");
-function checkForAuthenticationCookie(cookieName){
-    return (req,res,next)=>{
-        //console.log("cookies",req.cookies);
-        const tokenCookieValue=req.cookies[cookieName];
-        if(!tokenCookieValue){
-          return  next();
-        }
-    
-    try {
-        const userPayLoad=validateToken(tokenCookieValue);
-        req.user=userPayLoad;
-       // console.log("User payload",req.user);
-    } catch (error) {}
-   return next();
-};
-}
-module.exports={
-    checkForAuthenticationCookie,
-}
+const jwt = require('jsonwebtoken');
+
+     function checkForAuthenticationCookie(cookieName) {
+         return (req, res, next) => {
+             const token = req.cookies[cookieName];
+             if (!token) {
+                 req.user = null;
+                 return next();
+             }
+             try {
+                 const payload = jwt.verify(token, 'your_jwt_secret'); // Replace with your JWT secret
+                 req.user = payload;
+                 next();
+             } catch (e) {
+                 req.user = null;
+                 next();
+             }
+         };
+     }
+
+     module.exports = { checkForAuthenticationCookie };

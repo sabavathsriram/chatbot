@@ -5,76 +5,162 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VIDYASAARATHI Chatbot</title>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Include DOMPurify for XSS sanitization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.7/purify.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
         body { display: flex; flex-direction: column; align-items: center; background: #f0f2f5; height: 100vh; }
-        .navbar { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: #333; color: white; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: #333;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
         .menu-icon i { font-size: 22px; cursor: pointer; }
         .title { font-size: 18px; font-weight: bold; text-align: center; flex: 1; }
-        .translate-container { position: relative; }
-        .translate-btn { background: #555; border: none; color: white; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-size: 16px; display: flex; align-items: center; gap: 5px; }
-        .translate-btn i { font-size: 18px; }
-        .translate-btn:hover { background: #777; }
-        .translate-dropdown { display: none; position: absolute; top: 100%; right: 0; background: #555; border-radius: 5px; min-width: 120px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); z-index: 1; }
-        .translate-container:hover .translate-dropdown { display: block; }
-        .translate-dropdown select { width: 100%; padding: 8px; border: none; background: #666; color: white; border-radius: 5px; cursor: pointer; }
-        .translate-dropdown select:hover { background: #777; }
-        .chat-container { width: 90%; max-width: 600px; flex-grow: 1; padding: 20px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; max-height: 65vh; border-radius: 10px; background: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); margin-top: 20px; }
-        .message { max-width: 75%; padding: 12px; border-radius: 15px; font-size: 14px; word-wrap: break-word; }
-        .bot { background: #e1f5fe; align-self: flex-start; }
-        .user { background: #d1e7dd; align-self: flex-end; }
-        .typing { font-style: italic; color: gray; }
-        .faq-section { text-align: center; margin: 20px 0; }
-        .faq-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
-        .faq-buttons button { background: #333; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; transition: 0.3s; }
-        .faq-buttons button:hover { background: #555; }
-        .chat-input { width: 90%; max-width: 600px; display: flex; align-items: center; padding: 10px; background: white; border-radius: 30px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); position: fixed; bottom: 10px; }
-        .chat-input input { flex: 1; padding: 12px; border: none; border-radius: 30px; background: #f1f1f1; outline: none; font-size: 16px; margin-left: 50px; }
-        .mic-btn { 
-            position: absolute; 
-            left: 15px; 
-            background: #000000;
-            border: none; 
-            padding: 12px; 
-            border-radius: 50%; 
-            cursor: pointer; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            width: 40px; 
-            height: 40px; 
-            transition: background 0.3s; 
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+        .chat-container {
+            width: 90%;
+            max-width: 600px;
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow-y: auto;
+            max-height: 65vh;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
         }
-        .mic-btn:hover { 
-            background: #333333; 
+        .message {
+            max-width: 85%;
+            padding: 12px;
+            border-radius: 15px;
+            font-size: 14px;
+            word-wrap: break-word;
         }
-        .mic-btn::before {
-            content: '\f130';
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-            color: white;
+        .bot {
+            background: #e1f5fe;
+            align-self: flex-start;
+        }
+        .user {
+            background: #d1e7dd;
+            align-self: flex-end;
+        }
+        .typing {
+            font-style: italic;
+            color: gray;
+        }
+        /* New styles for structured response */
+        .response-container {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 10px 0;
+        }
+        .response-container h1 {
             font-size: 18px;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
         }
-        .send-btn { 
-            position: absolute; 
-            right: 15px; 
-            background: #333; 
-            border: none; 
-            padding: 12px; 
-            border-radius: 50%; 
-            cursor: pointer; 
-            color: white; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 18px; 
-            width: 40px; 
-            height: 40px; 
-            transition: 0.3s; 
+        .response-container h2 {
+            font-size: 16px;
+            color: #333;
+            margin: 10px 0 8px;
         }
-        .send-btn:hover { 
-            background: #555; 
+        .response-container p, .response-container ul {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .response-container b {
+            font-weight: bold;
+            color: #333;
+        }
+        .response-container ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .response-container li {
+            margin-bottom: 5px;
+        }
+        .contact {
+            font-style: italic;
+            text-align: center;
+            color: #555;
+            margin-top: 10px;
+        }
+        .faq-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .faq-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .faq-buttons button {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .faq-buttons button:hover {
+            background: #555;
+        }
+        .chat-input {
+            width: 90%;
+            max-width: 600px;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            bottom: 10px;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 30px;
+            background: #f1f1f1;
+            outline: none;
+            font-size: 16px;
+            margin-right: 50px;
+        }
+        .send-btn {
+            position: absolute;
+            right: 15px;
+            background: #333;
+            border: none;
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            width: 40px;
+            height: 40px;
+            transition: 0.3s;
+        }
+        .send-btn:hover {
+            background: #555;
         }
     </style>
 </head>
@@ -82,27 +168,18 @@
     <nav class="navbar">
         <div class="menu-icon"><i class="fas fa-bars"></i></div>
         <div class="title" id="title">VIDYASAARATHI</div>
-        <div class="translate-container">
-            <button class="translate-btn" title="Translate" id="translateBtn"><i class="fas fa-language"></i> Translate</button>
-            <div class="translate-dropdown">
-                <select id="languageSelect" onchange="changeLanguage()">
-                    <option value="en">English</option>
-                    <option value="hi">Hindi</option>
-                    <option value="te">Telugu</option>
-                    <option value="mr">Marathi</option>
-                    <option value="ta">Tamil</option>
-                    <option value="kn">Kannada</option>
-                </select>
-            </div>
-        </div>
     </nav>
     <div class="chat-container" id="chatbox">
         <div class="message bot" id="initialMessage">
-            Hello! I’m your college assistant. How can I help you today? You can ask me about admissions, courses, faculty, exams, placements, campus facilities, and many more!
+            <div class="response-container">
+                <h1>Welcome to VIDYASAARATHI</h1>
+                <p>Hello! I’m your college assistant for Keshav Memorial Institute of Technology (KMIT). I can help you with information about <b>admissions</b>, <b>courses</b>, <b>faculty</b>, <b>exams</b>, <b>placements</b>, <b>campus facilities</b>, and more. Ask away!</p>
+                <p class="contact">Contact <b>info@kmit.in</b> for further assistance.</p>
+            </div>
         </div>
     </div>
     <div class="faq-section">
-        <h3 id="faqHeading">FAQs</h3>
+        <h3>FAQs</h3>
         <div class="faq-buttons" id="faqButtons">
             <button onclick="sendFAQ('Tell me about Admissions')">Admissions</button>
             <button onclick="sendFAQ('Tell me about Placements')">Placements</button>
@@ -110,208 +187,50 @@
         </div>
     </div>
     <div class="chat-input">
-        <button class="mic-btn" id="micBtn"></button>
         <input type="text" id="userInput" placeholder="Ask your question here!" onkeypress="handleKeyPress(event)">
         <button class="send-btn" id="sendBtn">➜</button>
     </div>
 
     <script>
-        let recognition;
-        let selectedLang = 'en'; // Default language
-        let translations = {
-            'en': {
-                'title': 'VIDYASAARATHI',
-                'translateBtn': 'Translate',
-                'initialMessage': 'Hello! I’m your college assistant. How can I help you today? You can ask me about admissions, courses, faculty, exams, placements, campus facilities, and many more!',
-                'faqHeading': 'FAQs',
-                'faqButtons': {
-                    'Tell me about Admissions': 'Admissions',
-                    'Tell me about Placements': 'Placements',
-                    'Tell me about Campus Facilities': 'Campus Facilities'
-                },
-                'placeholder': 'Ask your question here!',
-                'error': 'Sorry, something went wrong. Please try again!'
-            },
-            'hi': {
-                'title': 'विद्यासारथी',
-                'translateBtn': 'अनुवाद',
-                'initialMessage': 'नमस्ते! मैं आपका कॉलेज सहायक हूँ। आज मैं आपकी कैसे मदद कर सकता हूँ? आप प्रवेश, कोर्स, संकाय, परीक्षा, प्लेसमेंट, कैंपस सुविधाएँ और कई अन्य के बारे में पूछ सकते हैं!',
-                'faqHeading': 'सामान्य प्रश्न',
-                'faqButtons': {
-                    'Tell me about Admissions': 'प्रवेश',
-                    'Tell me about Placements': 'प्लेसमेंट',
-                    'Tell me about Campus Facilities': 'कैंपस सुविधाएँ'
-                },
-                'placeholder': 'यहाँ अपना प्रश्न पूछें!',
-                'error': 'क्षमा करें, कुछ गलत हो गया। कृपया फिर से प्रयास करें!'
-            },
-            'te': {
-                'title': 'విద్యసారథి',
-                'translateBtn': 'అనువాదం',
-                'initialMessage': 'హలో! నేను మీ కాలేజ్ సహాయకుడిని. నేను నిన్ను ఈ రోజు ఎలా సహాయపడగలను? నీవు ప్రవేశాలు, కోర్సులు, ఫ్యాకల్టీ, పరీక్షలు, ప్లేస్‌మెంట్‌లు, క్యాంపస్ సౌకర్యాలు మరియు ఇంకా అనేక దాని గురించి అడగవచ్చు!',
-                'faqHeading': 'తరచుగా అడిగే ప్రశ్నలు',
-                'faqButtons': {
-                    'Tell me about Admissions': 'ప్రవేశాలు',
-                    'Tell me about Placements': 'ప్లేస్‌మెంట్‌లు',
-                    'Tell me about Campus Facilities': 'క్యాంపస్ సౌకర్యాలు'
-                },
-                'placeholder': 'మీ ప్రశ్నను ఇక్కడ అడగండి!',
-                'error': 'క్షమించండి, ఏదో తప్పు జరిగింది. దయచేసి మళ్లీ ప్రయత్నించండి!'
-            },
-            'mr': {
-                'title': 'विद्यासारथी',
-                'translateBtn': 'अनुवाद',
-                'initialMessage': 'हॅलो! मी तुमचा कॉलेज सहाय्यक आहे. मी आज तुम्हाला कसं मदत करू शकतो? तुम्ही प्रवेश, कोर्सेस, संकाय, परीक्षा, प्लेसमेंट्स, कॅम्पस सुविधा आणि आणखी बरं काही विचारू शकता!',
-                'faqHeading': 'सामान्य प्रश्न',
-                'faqButtons': {
-                    'Tell me about Admissions': 'प्रवेश',
-                    'Tell me about Placements': 'प्लेसमेंट्स',
-                    'Tell me about Campus Facilities': 'कॅम्पस सुविधा'
-                },
-                'placeholder': 'तुमचा प्रश्न इथे विचारा!',
-                'error': 'क्षमस्व, काहीतरी चूक झाली. कृपया पुन्हा प्रयत्न करा!'
-            },
-            'ta': {
-                'title': 'வித்யசாரதி',
-                'translateBtn': 'மொழிபெயர்க்க',
-                'initialMessage': 'வணக்கம்! நான் உங்கள் கல்லூரி உதவியாளர். இன்று நான் உங்களுக்கு எப்படி உதவ முடியும்? நீங்கள் சேர்க்கை, படிப்புகள், பீச்சி, தேர்வுகள், பிளேஸ்மெண்ட்ஸ், கேம்பஸ் வசதிகள் மற்றும் பலவற்றை கேட்கலாம்!',
-                'faqHeading': 'பொதுவாக கேட்கப்படும் கேள்விகள்',
-                'faqButtons': {
-                    'Tell me about Admissions': 'சேர்க்கை',
-                    'Tell me about Placements': 'பிளேஸ்மெண்ட்ஸ்',
-                    'Tell me about Campus Facilities': 'கேம்பஸ் வசதிகள்'
-                },
-                'placeholder': 'உங்கள் கேள்வியை இங்கே கேளுங்கள்!',
-                'error': 'மன்னிக்கவும், ஏதோ தவறு நடந்தது. தயவு செய்து மீண்டும் முயற்சி செய்யவும்!'
-            },
-            'kn': {
-                'title': 'ವಿದ್ಯಸಾರಥಿ',
-                'translateBtn': 'ಅನುವಾದ',
-                'initialMessage': 'ಹಲೋ! ನಾನು ನಿಮ್ಮ ಕಾಲೇಜ್ ಸಹಾಯಕ. ಇಂದು ನಾನು ನಿಮಗೆ ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು? ನೀವು ಪ್ರವೇಶ, ಕೋರ್ಸ್‌ಗಳು, ಫ್ಯಾಕಲ್ಟಿ, ಪರೀಕ್ಷೆಗಳು, ಪ್ಲೇಸ್‌ಮೆಂಟ್‌ಗಳು, ಕ್ಯಾಂಪಸ್ ಸೌಲಭ್ಯಗಳು ಮತ್ತು ಇತರೆ ಅನೇಕ ಬಗ್ಗೆ ಕೇಳಬಹುದು!',
-                'faqHeading': 'ಪ್ರಶ್ನೆಗಳು',
-                'faqButtons': {
-                    'Tell me about Admissions': 'ಪ್ರವೇಶ',
-                    'Tell me about Placements': 'ಪ್ಲೇಸ್‌ಮೆಂಟ್‌ಗಳು',
-                    'Tell me about Campus Facilities': 'ಕ್ಯಾಂಪಸ್ ಸೌಲಭ್ಯಗಳು'
-                },
-                'placeholder': 'ನಿಮ್ಮ ಪ್ರಶ್ನೆಯನ್ನು ಇಲ್ಲಿ ಕೇಳಿ!',
-                'error': 'ಕ್ಷಮಿಸಿ, ಏನೋ ತಪ್ಪಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ!'
-            }
-        };
-
-        // Initialize Speech Recognition
-        function startSpeechRecognition() {
-            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-                alert("Speech recognition is not supported in this browser. Please use Chrome or Edge.");
-                return;
-            }
-
-            const langMap = {
-                'en': 'en-US',
-                'hi': 'hi-IN',
-                'te': 'te-IN',
-                'mr': 'mr-IN',
-                'ta': 'ta-IN',
-                'kn': 'kn-IN'
-            };
-            const speechLang = langMap[selectedLang] || 'en-US';
-
-            recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-            recognition.lang = speechLang;
-            recognition.interimResults = true;
-            recognition.maxAlternatives = 1;
-            recognition.continuous = false;
-
-            recognition.onresult = function(event) {
-                let interimTranscript = '';
-                for (let i = event.resultIndex; i < event.results.length; i++) {
-                    interimTranscript += event.results[i][0].transcript;
-                }
-                document.getElementById('userInput').value = interimTranscript.trim();
-                console.log("Recognized: ", interimTranscript);
-                if (event.results[event.results.length - 1].isFinal) {
-                    stopRecognition();
-                }
-            };
-
-            recognition.onerror = function(event) {
-                console.error("Speech recognition error:", event.error);
-                if (event.error === 'no-speech' || event.error === 'audio-capture') {
-                    alert("No speech detected or microphone issue. Please try again or check permissions.");
-                }
-                stopRecognition();
-            };
-
-            recognition.onend = function() {
-                console.log("Speech recognition ended.");
-            };
-
-            try {
-                recognition.start();
-                console.log("Speech recognition started for ", speechLang);
-            } catch (e) {
-                console.error("Recognition start failed:", e);
-                alert("Failed to start speech recognition. Please try again.");
-            }
+        // Enhanced markdown parser
+        function parseMarkdown(text) {
+            // Convert **text** to <b>text</b>
+            text = text.replace(/\*\*([^\*]+)\*\*/g, '<b>$1</b>');
+            // Convert * item to <li>item</li> for lists
+            text = text.replace(/\n\s*\*\s+([^\n]+)/g, '<li>$1</li>');
+            // Wrap lists in <ul> tags
+            text = text.replace(/(<li>.*<\/li>)/g, '<ul>$1</ul>');
+            // Convert newlines to <br> for better formatting
+            text = text.replace(/\n/g, '<br>');
+            return text;
         }
 
-        // Stop Speech Recognition
-        function stopRecognition() {
-            if (recognition) {
-                recognition.stop();
-                recognition = null;
-                console.log("Speech recognition stopped");
-            }
+        // Format response into structured HTML
+        function formatResponse(query, answer) {
+            // Simple query categorization for title
+            const queryLower = query.toLowerCase();
+            let title = 'KMIT Information';
+            if (queryLower.includes('admissions')) title = 'KMIT Admissions Information';
+            else if (queryLower.includes('placements')) title = 'KMIT Placements Information';
+            else if (queryLower.includes('faculty')) title = 'KMIT Faculty Information';
+            else if (queryLower.includes('campus facilities')) teslim = 'KMIT Campus Facilities Information';
+            else if (queryLower.includes('distance')) title = 'Distance from KMIT';
+
+            return `
+                <div class="response-container">
+                    <h1>${title}</h1>
+                    <p>${answer}</p>
+                    <p class="contact">For further details, contact <b>info@kmit.in</b>.</p>
+                </div>
+            `;
         }
 
-        // Toggle Speech Recognition
-        document.getElementById("micBtn").addEventListener("click", function () {
-            if (!recognition) {
-                startSpeechRecognition();
-            } else {
-                stopRecognition();
-            }
-            console.log("Microphone clicked! Toggled speech recognition.");
-        });
-
-        // LibreTranslate API Call
-        async function translateWithLibre(text, sourceLang, targetLang) {
-            const url = 'https://libretranslate.de/translate';
-            try {
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        q: text,
-                        source: sourceLang,
-                        target: targetLang,
-                        format: 'text'
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`LibreTranslate API error: ${response.status}`);
-                }
-
-                const data = await response.json();
-                if (data.translatedText) {
-                    return data.translatedText;
-                } else {
-                    throw new Error('No translation returned');
-                }
-            } catch (error) {
-                console.error('LibreTranslate error:', error.message);
-                return text; // Fallback to original text
-            }
-        }
-
-        // Handle Send Button
         async function getAnswer(query) {
             try {
-                const response = await fetch("http://localhost:8001/query/", {
+                const response = await fetch("/query", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ query: query })
+                    body: JSON.stringify({ query })
                 });
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -320,27 +239,34 @@
                 if (!data.answer) {
                     throw new Error("No answer in response");
                 }
-                return data.answer;
+                // Parse markdown and sanitize
+                const parsedAnswer = parseMarkdown(data.answer);
+                return DOMPurify.sanitize(parsedAnswer);
             } catch (error) {
                 console.error("Fetch error:", error.message);
-                const mockResponses = {
-                    'Tell me about Admissions': 'To be eligible for admission, you need to pass Intermediate (10+2) with Mathematics, Physics, and Chemistry and take the EAPCET entrance exam. 70% of seats are allocated based on EAPCET scores, and 30% are for Management/NRI. Lateral entry for diploma holders is available for 20% of the intake in the second year, via the ECET entrance test. For the 2024-25 academic year, the first-year tuition fee is ₹103,000, with special fees of ₹5,500 and NBA fees of ₹3,000. Second, third, and fourth-year fees are ₹103,000 tuition, ₹2,500 special fees, and ₹3,000 NBA fees. Contact the Admissions Department at 6302140205.',
-                    'Tell me about Placements': 'In the 2023-2024 batch, 103 companies visited, resulting in 662 offers rolled out to 557 registered students. 511 students were placed, with an average salary of 9.69 LPA. The highest CTC was 49.8 LPA at Intuit.',
-                    'Tell me about Campus Facilities': 'KMIT has indoor sports facilities including badminton (professional-standard court behind Block B), yoga (daily coaching 4-5:30 pm), and chess, table tennis, and caroms (dedicated rooms above auditorium). Outdoor facilities include a large football field, a professional-standard basketball court, and a volleyball field. Other facilities include a gym (faculty use 3:30-4:45 pm) and an auditorium. Training is offered for basketball, taekwondo, volleyball, and kabaddi, with inter-branch tournaments, proposed inter-collegiate basketball tournaments, fitness training twice weekly, and inter-class competitions 2-3 times yearly.'
-                };
-                return mockResponses[query] || translations[selectedLang]['error'];
+                return DOMPurify.sanitize("Sorry, something went wrong. Please try again or contact <b>info@kmit.in</b>.");
             }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                document.getElementById("sendBtn").click();
+            }
+        }
+
+        async function sendFAQ(query) {
+            document.getElementById("userInput").value = query;
+            await document.getElementById("sendBtn").click();
         }
 
         document.getElementById("sendBtn").addEventListener("click", async function () {
             const query = document.getElementById("userInput").value.trim();
-            if (!query) return alert(translations[selectedLang]['error']);
+            if (!query) return alert('Please enter a question!');
 
             let chatBox = document.getElementById("chatbox");
             let userMessage = document.createElement("div");
             userMessage.classList.add("message", "user");
             userMessage.textContent = query;
-            userMessage.dataset.original = query;
             chatBox.appendChild(userMessage);
             chatBox.scrollTop = chatBox.scrollHeight;
             document.getElementById("userInput").value = "";
@@ -355,103 +281,11 @@
             chatBox.removeChild(typingIndicator);
             let botMessage = document.createElement("div");
             botMessage.classList.add("message", "bot");
-            botMessage.textContent = answer;
-            botMessage.dataset.original = answer;
+            // Wrap answer in structured format
+            botMessage.innerHTML = formatResponse(query, answer);
             chatBox.appendChild(botMessage);
             chatBox.scrollTop = chatBox.scrollHeight;
-            await updateTranslations();
         });
-
-        // Translate Dynamic Responses with LibreTranslate
-        async function translateDynamicResponse(text) {
-            const mockResponses = {
-                'To be eligible for admission, you need to pass Intermediate (10+2) with Mathematics, Physics, and Chemistry and take the EAPCET entrance exam. 70% of seats are allocated based on EAPCET scores, and 30% are for Management/NRI. Lateral entry for diploma holders is available for 20% of the intake in the second year, via the ECET entrance test. For the 2024-25 academic year, the first-year tuition fee is ₹103,000, with special fees of ₹5,500 and NBA fees of ₹3,000. Second, third, and fourth-year fees are ₹103,000 tuition, ₹2,500 special fees, and ₹3,000 NBA fees. Contact the Admissions Department at 6302140205.': {
-                    'hi': 'प्रवेश के लिए पात्र होने के लिए, आपको गणित, भौतिकी और रसायन विज्ञान के साथ इंटरमीडिएट (10+2) पास करना होगा और EAPCET प्रवेश परीक्षा देनी होगी। 70% सीटें EAPCET स्कोर के आधार पर आवंटित की जाती हैं, और 30% प्रबंधन/NRI के लिए हैं। डिप्लोमा धारकों के लिए दूसरी कक्षा में 20% सेवन के लिए पार्श्व प्रवेश उपलब्ध है, ECET प्रवेश परीक्षा के माध्यम से। 2024-25 शैक्षणिक वर्ष के लिए, पहला वर्ष का ट्यूशन शुल्क ₹103,000 है, विशेष शुल्क ₹5,500 और NBA शुल्क ₹3,000 है। दूसरा, तीसरा और चौथा वर्ष का शुल्क ₹103,000 ट्यूशन, ₹2,500 विशेष शुल्क, और ₹3,000 NBA शुल्क है। प्रवेश विभाग से 6302140205 पर संपर्क करें।',
-                    'te': 'ప్రవేశం కోసం అర్హత సాధించడానికి, మీరు గణితం, భౌతిక శాస్త్రం మరియు రసాయన శాస్త్రంతో ఇంటర్మీడియట్ (10+2) ఉత్తీర్ణత సాధించి EAPCET ప్రవేశ పరీక్ష రాయాలి. 70% సీట్లు EAPCET స్కోర్ల ఆధారంగా కేటాయించబడతాయి, 30% మేనేజ్‌మెంట్/NRI కోసం ఉన్నాయి. డిప్లొమా ధారకుల కోసం రెండవ సంవత్సరంలో 20% చేరిక కోసం లాటరల్ ఎంట్రీ ECET ప్రవేశ పరీక్ష ద్వారా అందుబాటులో ఉంది. 2024-25 అకాడమిక్ సంవత్సరం కోసం, మొదటి సంవత్సర ట్యూషన్ ఫీజు ₹103,000, ప్రత్యేక ఫీజులు ₹5,500 మరియు NBA ఫీజులు ₹3,000. రెండవ, మూడవ మరియు నాల్గవ సంవత్సరాల ఫీజులు ₹103,000 ట్యూషన్, ₹2,500 ప్రత్యేక ఫీజులు మరియు ₹3,000 NBA ఫీజులు. ప్రవేశ శాఖను 6302140205 నంబర్‌లో సంప్రదించండి.',
-                    'mr': 'प्रवेशासाठी पात्र ठरायला, तुम्हाला गणित, भौतिकशास्त्र आणि रसायनशास्त्रासह इंटरमीडिएट (10+2) पास करावे लागेल आणि EAPCET प्रवेश परीक्षा द्यावी लागेल। 70% जागा EAPCET स्कोअरच्या आधारे वाटप केल्या जातात, आणि 30% व्यवस्थापन/NRI साठी आहेत। डिप्लोमा धारकांसाठी दुसऱ्या वर्षात 20% सेवनासाठी पार्श्व प्रवेश उपलब्ध आहे, ECET प्रवेश चाचणीद्वारे। 2024-25 शैक्षणिक वर्षासाठी, पहिल्या वर्षाचे ट्यूशन फी ₹103,000 आहे, विशेष फी ₹5,500 आणि NBA फी ₹3,000 आहे। दुसरे, तिसरे आणि चौथे वर्षाचे फी ₹103,000 ट्यूशन, ₹2,500 विशेष फी, आणि ₹3,000 NBA फी आहे। प्रवेश विभागाशी 6302140205 वर संपर्क साधा.',
-                    'ta': 'சேர்க்கைக்கு தகுதி பெற, நீங்கள் கணிதம், இயற்பியல் மற்றும் வேதியியலுடன் இன்டர்மீடியேட் (10+2) தேர்ச்சி பெற வேண்டும் மற்றும் EAPCET நுழைவுத் தேர்வு எழுத வேண்டும்। 70% இடங்கள் EAPCET மதிப்பெண்களின் அடிப்படையில் ஒதுக்கப்படுகின்றன, மற்றும் 30% மேனேஜ்மென்ட்/NRI-க்கு உள்ளது। டிப்ளோமா பெற்றவர்களுக்கு இரண்டாம் ஆண்டில் 20% சேர்க்கைக்கு லேட்டரல் எண்ட்ரி ECET நுழைவுத் தேர்வின் மூலம் கிடைக்கிறது। 2024-25 அகாடமிக் ஆண்டிற்கு, முதல் ஆண்டு கல்விக் கட்டணம் ₹103,000, சிறப்பு கட்டணம் ₹5,500 மற்றும் NBA கட்டணம் ₹3,000 ஆகும்। இரண்டாம், மூன்றாம் மற்றும் நான்காம் ஆண்டு கட்டணங்கள் ₹103,000 கல்விக் கட்டணம், ₹2,500 சிறப்பு கட்டணம் மற்றும் ₹3,000 NBA கட்டணம். சேர்க்கை துறையை 6302140205 இல் தொடர்பு கொள்ளவும்.',
-                    'kn': 'ಪ್ರವೇಶಕ್ಕೆ ಯೋಗ್ಯರಾಗಲು, ನೀವು ಗಣಿತ, ಭೌತಶಾಸ್ತ್ರ ಮತ್ತು ರಸಾಯನಶಾಸ್ತ್ರದೊಂದಿಗೆ ಇಂಟರ್ಮೀಡಿಯೇಟ್ (10+2) ಉತ್ತೀರ್ಣರಾಗಬೇಕು ಮತ್ತು EAPCET ಪ್ರವೇಶ ಪರೀಕ್ಷೆಯಲ್ಲಿ ಭಾಗವಹಿಸಬೇಕು. 70% ಆಸನಗಳು EAPCET ಸ್ಕೋರ್‌ಗಳ ಆಧಾರದ ಮೇಲೆ ಮೀಸಲಾಗಿವೆ, ಮತ್ತು 30% ಮ್ಯಾನೇಜ್‌ಮೆಂಟ್/NRIಗೆ ಇವೆ. ಡಿಪ್ಲೋಮಾ ಧಾರಕರಿಗೆ ಎರಡನೇ ವರ್ಷದಲ್ಲಿ 20% ಸೇರಲು ಲ್ಯಾಟರಲ್ ಎಂಟ್ರಿ ECET ಪ್ರವೇಶ ಪರೀಕ್ಷೆಯ ಮೂಲಕ ಲಭ್ಯವಿದೆ. 2024-25 ಅಧ್ಯಯನ ವರ್ಷಕ್ಕೆ, ಮೊದಲನೇ ವರ್ಷದ ಟ್ಯೂಶನ್ ಶುಲ್ಕ ₹103,000, ವಿಶೇಷ ಶುಲ್ಕ ₹5,500 ಮತ್ತು NBA ಶುಲ್ಕ ₹3,000 ಆಗಿದೆ. ಎರಡನೇ, ಮೂರನೇ ಮತ್ತು ನಾಲ್ಕನೇ ವರ್ಷದ ಶುಲ್ಕ ₹103,000 ಟ್ಯೂಶನ್, ₹2,500 ವಿಶೇಷ ಶುಲ್ಕ, ಮತ್ತು ₹3,000 NBA ಶುಲ್ಕ ಆಗಿದೆ. ಪ್ರವೇಶ ಇಲಾಖೆಯನ್ನು 6302140205 ಗೆ ಸಂಪರ್ಕಿಸಿ.'
-                },
-                'In the 2023-2024 batch, 103 companies visited, resulting in 662 offers rolled out to 557 registered students. 511 students were placed, with an average salary of 9.69 LPA. The highest CTC was 49.8 LPA at Intuit.': {
-                    'hi': '2023-2024 बैच में 103 कंपनियाँ आईं, जिसके परिणामस्वरूप 557 पंजीकृत छात्रों को 662 ऑफर दिए गए। 511 छात्रों को नियुक्ति मिली, औसत वेतन 9.69 LPA रहा। सबसे अधिक CTC 49.8 LPA इंटुइट में था।',
-                    'te': '2023-2024 బ్యాచ్‌లో 103 కంపెనీలు సందర్శించాయి, ఫలితంగా 557 నమోదైన విద్యార్థులకు 662 ఆఫర్‌లు అందాయి. 511 విద్యార్థులు ఎంపికైనారు, సరాసరి జీతం 9.69 LPA. ఎక్కువ CTC 49.8 LPA ఇంట్యూయిట్‌లో ఉంది.',
-                    'mr': '2023-2024 बॅचमध्ये 103 कंपन्या भेट दिल्या, ज्यामुळे 557 नोंदणीकृत विद्यार्थ्यांना 662 ऑफर मिळाल्या. 511 विद्यार्थ्यांना नोकरी मिळाली, सरासरी वेतन 9.69 LPA होते. सर्वोच्च CTC 49.8 LPA इंटुइटमध्ये होते।',
-                    'ta': '2023-2024 பீச்சில் 103 நிறுவனங்கள் வந்தன, இதனால் 557 பதிவு செய்த மாணவர்களுக்கு 662 ஆஃபர்கள் வழங்கப்பட்டன. 511 மாணவர்கள் வேலை பெற்றனர், சராசரி சம்பளம் 9.69 LPA. உயர்ந்த CTC 49.8 LPA இண்ட்யூயிட் நிறுவனத்தில் உள்ளது।',
-                    'kn': '2023-2024 ಬ್ಯಾಚ್‌ನಲ್ಲಿ 103 ಕಂಪನಿಗಳು ಭೇಟಿ ನೀಡಿದವು, ಇದರಿಂದ 557 ನೋಂದಾಯಿಸಿದ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ 662 ಆಫರ್‌ಗಳು ಲಭಿಸಿದವು. 511 ವಿದ್ಯಾರ್ಥಿಗಳು ಉದ್ಯೋಗ ಪಡೆದರು, ಸರಾಸರಿ ಸಂಬಳ 9.69 LPA ಇತ್ತು. ಗರಿಷ್ಠ CTC 49.8 LPA ಇಂಟ್ಯೂಯಿಟ್‌ನಲ್ಲಿ ಇತ್ತು।'
-                },
-                'KMIT has indoor sports facilities including badminton (professional-standard court behind Block B), yoga (daily coaching 4-5:30 pm), and chess, table tennis, and caroms (dedicated rooms above auditorium). Outdoor facilities include a large football field, a professional-standard basketball court, and a volleyball field. Other facilities include a gym (faculty use 3:30-4:45 pm) and an auditorium. Training is offered for basketball, taekwondo, volleyball, and kabaddi, with inter-branch tournaments, proposed inter-collegiate basketball tournaments, fitness training twice weekly, and inter-class competitions 2-3 times yearly.': {
-                    'hi': 'KMIT में इनडोर खेल सुविधाएँ हैं, जिसमें बैडमिंटन (ब्लॉक B के पीछे पेशेवर मानक कोर्ट), योग (दैनिक कोचिंग 4-5:30 बजे), और शतरंज, टेबल टेनिस, और कैरम (ऑडिटोरियम के ऊपर समर्पित कमरे) शामिल हैं। आउटडोर सुविधाओं में एक बड़ा फुटबॉल मैदान, पेशेवर मानक बास्केटबॉल कोर्ट, और वॉलीबॉल मैदान शामिल हैं। अन्य सुविधाओं में जिम (कर्मचारियों द्वारा 3:30-4:45 बजे उपयोग) और एक ऑडिटोरियम शामिल हैं। बास्केटबॉल, ताइक्वांडो, वॉलीबॉल, और कबड्डी के लिए प्रशिक्षण दिया जाता है, जिसमें अंतर-शाखा टूर्नामेंट, प्रस्तावित अंतर-महाविद्यालय बास्केटबॉल टूर्नामेंट, साप्ताहिक दो बार फिटनेस प्रशिक्षण, और साल में 2-3 बार अंतर-कक्षा प्रतियोगिताएँ शामिल हैं।',
-                    'te': 'KMITలో ఇండోర్ క్రీడా సౌకర్యాలు ఉన్నాయి, ఇందులో బ్యాడ్మింటన్ (బ్లాక్ B వెనుక ప్రొఫెషనల్ స్టాండర్డ్ కోర్ట్), యోగా (రోజువారీ కోచింగ్ 4-5:30 సాయంత్రం), మరియు చెస్, టేబుల్ టెన్నిస్, కారంస్ (ఆడిటోరియం పైన అంకితం చేసిన గదులు) ఉన్నాయి. ఔట్‌డోర్ సౌకర్యాలలో పెద్ద ఫుట్‌బాల్ మైదానం, ప్రొఫెషనల్ స్టాండర్డ్ బాస్కెట్‌బాల్ కోర్ట్, మరియు వాలీబాల్ మైదానం ఉన్నాయి. ఇతర సౌకర్యాలలో జిమ్ (ఫ్యాకల్టీ 3:30-4:45 సాయంత్రం ఉపయోగం) మరియు ఆడిటోరియం ఉన్నాయి. బాస్కెట్‌బాల్, టేక్వాండో, వాలీబాల్, కబడ్డీ కోసం శిక్షణ అందించబడుతుంది, ఇందులో ఇంటర్-బ్రాంచ్ టోర్నమెంట్‌లు, ప్రతిపాదిత ఇంటర్-కాలేజియేట్ బాస్కెట్‌బాల్ టోర్నమెంట్‌లు, వారానికి రెండు సార్లు ఫిట్‌నెస్ శిక్షణ, మరియు సంవత్సరానికి 2-3 సార్లు ఇంటర్-క్లాస్ పోటీలు ఉన్నాయి.',
-                    'mr': 'KMIT मध्ये इनडोर खेळ सुविधा आहेत, ज्यामध्ये बैडमिंटन (ब्लॉक B च्या मागे प्रोफेशनल स्टँडर्ड कोर्ट), योग (दररोज प्रशिक्षण 4-5:30 वाजेपर्यंत), आणि शतरंज, टेबल टेनिस, आणि करम (ऑडिटोरियमच्या वर विशेष खोल्या) समाविष्ट आहेत। आउटडोर सुविधांमध्ये मोठे फुटबॉल मैदान, प्रोफेशनल स्टँडर्ड बास्केटबॉल कोर्ट, आणि व्हॉलीबॉल मैदान आहे। इतर सुविधांमध्ये जिम (प्राध्यापकांनी 3:30-4:45 वाजेपर्यंत उपयोग) आणि एक ऑडिटोरियम समाविष्ट आहे। बास्केटबॉल, ताइक्वांडो, व्हॉलीबॉल, आणि कबड्डी साठी प्रशिक्षण दिले जाते, ज्यामध्ये आंतर-शाखा स्पर्धा, प्रस्तावित आंतर-महाविद्यालय बास्केटबॉल स्पर्धा, आठवड्यातून दोनदा फिटनेस प्रशिक्षण, आणि वर्षातून 2-3 वेळा आंतर-वर्ग स्पर्धा समाविष्ट आहेत।',
-                    'ta': 'KMIT-ல் உள்ளூர் விளையாட்டு வசதிகள் உள்ளன, அதில் பேட்மிண்டன் (பிளாக் B-இன் பின்னால் தொழில்முறை மட்ட நீதிமன்றம்), யோகா (தினசரி பயிற்சி 4-5:30 மணி), மற்றும் சதுரங்கம், டேபிள் டென்னிஸ், கரோம்ஸ் (ஆடிட்டோரியத்தின் மேலே அர்ப்பணிக்கப்பட்ட அறைகள்) அடங்கும்। வெளிப்புற வசதிகளில் பெரிய கால்பந்து திடல், தொழில்முறை மட்ட பாஸ்கெட்பால் கோர்ட், மற்றும் வாலிபால் திடல் அடங்கும்। மற்ற வசதிகளில் ஜிம்ம (பீச்சி உபயோகம் 3:30-4:45 மணி) மற்றும் ஒரு ஆடிட்டோரியம் உள்ளன। பாஸ்கெட்பால், டேக்வாண்டோ, வாலிபால், மற்றும் கபடி ஆகியவற்றிற்கு பயிற்சி வழங்கப்படுகிறது, இதில் இண்டர்-பிராஞ்ச் டோர்னமெண்ட்கள், முன்மொழியப்பட்ட இண்டர்-கல்லூரி பாஸ்கெட்பால் டோர்னமெண்ட்கள், வாரத்திற்கு இரண்டு முறை உடற்பயிற்சி பயிற்சி, மற்றும் ஆண்டுக்கு 2-3 முறை இண்டர்-கிளாஸ் போட்டிகள் உள்ளன.',
-                    'kn': 'KMIT ಯಲ್ಲಿ ಒಳಗಡೆಯ ಆಟದ ಸೌಲಭ್ಯಗಳು ಇವೆ, ಇದರಲ್ಲಿ ಬ್ಯಾಡ್ಮಿಂಟನ್ (ಬ್ಲಾಕ್ B ಎದುರಿಗೆ ಪ್ರೊಫೆಶನಲ್ ಮಾನದಂಡದ ಕೋರ್ಟ್), ಯೋಗ (ದಿನನಿತ್ಯದ ತರಬೇತಿ 4-5:30 ರಾತ್ರಿ), ಮತ್ತು ಚೆಸ್, ಟೇಬಲ್ ಟೆನಿಸ್, ಮತ್ತು ಕ್ಯಾರಮ್ (ಆಡಿಟೋರಿಯಂ ಮೇಲಿನ ಭಾಗದಲ್ಲಿ ವಿಶೇಷ ಕೊಠಡಿಗಳು) ಸೇರಿವೆ. ಹೊರಾಂಗಣ ಸೌಲಭ್ಯಗಳಲ್ಲಿ ದೊಡ್ಡ ಫುಟ್‌ಬಾಲ್ ಕ್ರೀಡಾಂಗಣ, ಪ್ರೊಫೆಶನಲ್ ಮಾನದಂಡದ ಬ್ಯಾಸ್ಕೆಟ್‌ಬಾಲ್ ಕೋರ್ಟ್, ಮತ್ತು ವಾಲಿಬಾಲ್ ಕ್ರೀಡಾಂಗಣ ಸೇರಿವೆ. ಇತರ ಸೌಲಭ್ಯಗಳಲ್ಲಿ ಜಿಮ್ (ಫ್ಯಾಕಲ್ಟಿ 3:30-4:45 ರಾತ್ರಿ ಬಳಕೆ) ಮತ್ತು ಒಂದು ಆಡಿಟೋರಿಯಂ ಸೇರಿವೆ. ಬ್ಯಾಸ್ಕೆಟ್‌ಬಾಲ್, ಟೇಕ್ವಾಂಡೋ, ವಾಲಿಬಾಲ್, ಮತ್ತು ಕಬಡ್ಡಿಗೆ ತರಬೇತಿ ನೀಡಲಾಗುತ್ತದೆ, ಇದರಲ್ಲಿ ಇಂಟರ್-ಬ್ರಾಂಚ್ ಟೂರ್ನಮೆಂಟ್‌ಗಳು, ಪ್ರಸ್ತಾಪಿತ ಇಂಟರ್-ಕಾಲೇಜಿಯೇಟ್ ಬ್ಯಾಸ್ಕೆಟ್‌ಬಾಲ್ ಟೂರ್ನಮೆಂಟ್‌ಗಳು, ವಾರಕ್ಕೆ ಎರಡು ಬಾರಿ ಫಿಟ್‌ನೆಸ್ ತರಬೇತಿ, ಮತ್ತು ವರ್ಷಕ್ಕೆ 2-3 ಬಾರಿ ಇಂಟರ್-ಕ್ಲಾಸ್ ಸ್ಪರ್ಧೆಗಳು ಸೇರಿವೆ.'
-                }
-            };
-
-            if (mockResponses[text]?.[selectedLang]) {
-                return mockResponses[text][selectedLang];
-            }
-
-            // Use LibreTranslate for dynamic translations
-            const sourceLang = 'en';
-            const targetLang = selectedLang;
-            if (sourceLang === targetLang) {
-                return text;
-            }
-
-            return await translateWithLibre(text, sourceLang, targetLang);
-        }
-
-        // Update All Translations in UI
-        async function updateTranslations() {
-            document.getElementById("title").textContent = translations[selectedLang]['title'];
-            document.getElementById("translateBtn").innerHTML = translations[selectedLang]['translateBtn'] + ' <i class="fas fa-language"></i>';
-            document.getElementById("initialMessage").textContent = translations[selectedLang]['initialMessage'];
-            document.getElementById("faqHeading").textContent = translations[selectedLang]['faqHeading'];
-            document.getElementById("userInput").placeholder = translations[selectedLang]['placeholder'];
-
-            const faqButtons = document.getElementById("faqButtons").getElementsByTagName("button");
-            const faqKeys = ['Tell me about Admissions', 'Tell me about Placements', 'Tell me about Campus Facilities'];
-            for (let i = 0; i < faqButtons.length; i++) {
-                faqButtons[i].textContent = translations[selectedLang]['faqButtons'][faqKeys[i]];
-                faqButtons[i].setAttribute('onclick', `sendFAQ('${faqKeys[i]}')`);
-            }
-
-            // Translate all messages in chatbox
-            const messages = document.getElementById("chatbox").getElementsByClassName("message");
-            for (let msg of messages) {
-                if (msg.id !== "initialMessage") {
-                    let originalText = msg.dataset.original || msg.textContent;
-                    msg.textContent = await translateDynamicResponse(originalText) || originalText;
-                    msg.dataset.original = originalText;
-                }
-            }
-        }
-
-        // Change Language and Update UI
-        function changeLanguage() {
-            selectedLang = document.getElementById("languageSelect").value;
-            updateTranslations();
-            console.log("Language changed to:", selectedLang);
-        }
-
-        // FAQ Logic
-        function sendFAQ(question) {
-            document.getElementById("userInput").value = question;
-            document.getElementById("sendBtn").click();
-        }
-
-        // Handle Enter Key
-        function handleKeyPress(event) {
-            if (event.key === "Enter") {
-                document.getElementById("sendBtn").click();
-            }
-        }
-
-        // Initialize with default language
-        window.onload = function() {
-            changeLanguage();
-        };
     </script>
 </body>
 </html>

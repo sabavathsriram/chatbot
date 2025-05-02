@@ -1,0 +1,98 @@
+{
+  "EAPCET_Code": "KMIT",
+  "Admissions": {
+    "Eligibility": {
+      "Criteria": [
+        "Must have passed 10+2 with Mathematics, Physics, and Chemistry from a recognized board",
+        "Minimum 45% marks in 10+2 (40% for reserved categories)",
+        "Valid rank in TS EAPCET or equivalent entrance exam"
+      ],
+      "LateralEntry": {
+        "Criteria": [
+          "Diploma holders in Engineering/Technology",
+          "Valid rank in TS ECET"
+        ],
+        "YearOfEntry": "2nd"
+      }
+    },
+    "CoursesOffered": [
+      {
+        "Degree": "B.Tech",
+        "Program": "Computer Science & Engineering",
+        "Code": "CSE",
+        "TotalIntake": 360,
+        "Seats": {
+          "ConvenorQuota": 252,
+          "ManagementQuota": 108
+        }
+      },
+      {
+        "Degree": "B.Tech",
+        "Program": "Computer Science & Engineering (AI & ML)",
+        "Code": "CSM",
+        "TotalIntake": 180,
+        "Seats": {
+          "ConvenorQuota": 126,
+          "ManagementQuota": 54
+        }
+      },
+      {
+        "Degree": "B.Tech",
+        "Program": "Computer Science & Engineering (Data Science)",
+        "Code": "CSD",
+        "TotalIntake": 180,
+        "Seats": {
+          "ConvenorQuota": 126,
+          "ManagementQuota": 54
+        }
+      },
+      {
+        "Degree": "B.Tech",
+        "Program": "Information Technology",
+        "Code": "IT",
+        "TotalIntake": 120,
+        "Seats": {
+          "ConvenorQuota": 84,
+          "ManagementQuota": 36
+        }
+      }
+    ],
+    "FeeStructure": {
+      "ConvenorQuota": {
+        "TuitionFee": 135000,
+        "AdditionalFees": {
+          "AccreditationFee": 3000,
+          "Miscellaneous": 2500
+        }
+      },
+      "ManagementQuota": {
+        "TuitionFee": 135000,
+        "AdditionalFees": {
+          "AccreditationFee": 3000,
+          "Miscellaneous": 2500
+        }
+      },
+      "Note": "Fees are subject to change as per government regulations"
+    },
+    "AdmissionProcess": {
+      "Steps": [
+        "Apply through TS EAPCET counseling for Convenor Quota",
+        "Submit application directly to KMIT for Management Quota",
+        "Document verification and seat allotment",
+        "Fee payment and admission confirmation"
+      ],
+      "ImportantDates": {
+        "ApplicationStart": "2024-03-01",
+        "ApplicationEnd": "2024-05-31",
+        "CounselingStart": "2024-06-15"
+      }
+    },
+    "Contact": {
+      "AdmissionsOffice": {
+        "Email": "admissions@kmit.in",
+        "Phone": "040-23261407"
+      }
+    }
+  },
+  "LastUpdated": "2025-05-01"
+}

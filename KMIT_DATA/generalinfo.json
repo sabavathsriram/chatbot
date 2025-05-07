@@ -1,69 +1,87 @@
 {
-  "college_name": "KMIT",
-  "timings": "9:30-4:30",
-  "founder": "Neil Gogte",
-  "principal": "Uma Maheshwari",
-  "nirf_ranking": {
-    "year": "2023-2024",
-    "rank": 840
-  },
-  "academic_director": "Deepa Ganu",
-  "blocks": [
-    {
-      "name": "A",
-      "purpose": "First year"
+  "institute": "Keshav Memorial Institute of Technology",
+  "general_info": {
+    "cutoff_ranks": {
+      "description": "Cutoff ranks for different categories and branches",
+      "data": "For 2023: CSE (OC): 3255–3261, SC: ~33728–34493, ST: ~20663–34509, OBC: 8019–9127; CSE (AI & ML): 3605–3608; CSE (DS): 4060; IT: 4480"
     },
-    {
-      "name": "B",
-      "purpose": "Second year"
+    "discipline_policy": {
+      "strict": false,
+      "attendance_policy": "75%",
+      "environment": "Structured yet flexible with clubs and placements"
     },
-    {
-      "name": "C",
-      "purpose": null
+    "intake": {
+      "total_intake": 1200,
+      "departments": {
+        "CSE": { "students": 420, "sections": 6 },
+        "CSE (AI & ML)": { "students": 120, "sections": 2 },
+        "CSE (Data Science)": { "students": 180, "sections": 3 },
+        "IT": { "students": 120, "sections": 2 }
+      }
     },
-    {
-      "name": "D",
-      "purpose": "Bhavisya Dwarh"
+    "student_life": {
+      "academics": "Focused on CSE and coding",
+      "extracurriculars": ["dance", "music", "sports", "technical fests"],
+      "campus": "6-acre campus, vibrant and safe"
     },
-    {
-      "name": "E",
-      "purpose": "Administration Block"
+    "hostel": {
+      "on_campus": false,
+      "private_options": "Available in Narayanguda (~₹50K–₹80K/year)"
     },
-    {
-      "name": "F",
-      "purpose": "IT block"
+    "fee_structure": {
+      "2024-25": {
+        "tuition": 103000,
+        "special_fee": { "1st_year": 5500, "others": 2500 },
+        "nba_fee": 3000,
+        "total": { "1st_year": 111500, "others": 108000 }
+      },
+      "scholarships": "Available for SC/ST <10k rank and merit students"
     },
-    {
-      "name": "Granthalay",
-      "purpose": null
+    "events": {
+      "types": ["cultural festivals", "technical fests", "sports meets"],
+      "examples": ["Tessellator", "Hackathons", "June sports"]
+    },
+    "campus_area": "6 acres",
+    "anti_ragging_policy": {
+      "enforced": true,
+      "based_on": "UGC and AICTE regulations"
+    },
+    "college_timings": {
+      "typical": "9:30 AM – 4:30 PM",
+      "extended": "Up to 5:00 PM for labs and clubs"
+    },
+    "mental_health": {
+      "on_campus": false,
+      "alternatives": "External services, general faculty support"
+    },
+    "faculty": {
+      "approachable": true,
+      "qualifications": "Highly qualified; some run companies"
+    },
+    "teaching_methods": {
+      "blend": true,
+      "details": {
+        "laptops": "Used in labs and project work",
+        "traditional": "Whiteboard-based theory classes"
+      }
+    },
+    "academic_focus": {
+      "priority": "Coding, tech skills (JavaScript, Python, AI/ML)",
+      "other_subjects": "Mathematics, Physics, Soft Skills included"
+    },
+    "extracurricular_focus": {
+      "included": true,
+      "activities": ["dance", "music", "sports", "art", "hackathons"]
+    },
+    "placements": {
+      "placement_cell": "Handles training, invites companies",
+      "2024_stats": {
+        "students_placed": 546,
+        "total_offers": 791,
+        "highest_package": "₹122 LPA",
+        "average_package": "₹8.76 LPA"
+      },
+      "top_companies": ["Amazon", "Google", "Microsoft", "Deloitte"]
     }
-  ],
-  "total_cse_students": 720,
-  "facilities": {
-    "hostel": false,
-    "bus": false
-  },
-  "campus_size": "approximately 80,000 square feet",
-  "total_faculty": 220,
-  "clubs": [
-    "Kreeda",
-    "Aakarshan",
-    "Mudra",
-    "Rotaract",
-    "NSS",
-    "Recurse",
-    "Vachan",
-    "Street-Cause",
-    "Organising Committee",
-    "Aalap",
-    "Alumni",
-    "Public-Relations",
-    "Riti",
-    "TracesOfLenses"
-  ],
-  "events": [
-    "Patang Utsav",
-    "KMIT-EVENING",
-    "Navaraas"
-  ]
+  }
 }

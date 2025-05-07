@@ -1,110 +1,83 @@
 {
-    "Institution": {
-      "Name": "Keshav Memorial Institute of Technology (KMIT)",
-      "Address": "3-5-1026, Narayanguda, Hyderabad-500029, Telangana, India",
-      "Contact": {
-        "Email": "info@kmit.in",
-        "Phone": "040-23261407"
-      },
-      "Accreditation": {
-        "NAAC": "A Grade",
-        "NBA": "Accredited",
-        "AICTE": "Approved",
-        "Affiliation": "Jawaharlal Nehru Technological University Hyderabad (JNTUH)",
-        "Recognition": "Government of Telangana"
-      },
-      "EAPCET_Code": "KMIT",
-      "Established": 2007,
-      "PoweredBy": "Genesis Solutions Pvt Ltd"
+  "EAPCET_Code": "KMIT",
+  "Courses": [
+    {
+      "Degree": "B.Tech",
+      "Program": "Computer Science & Engineering",
+      "Code": "CSE"
     },
-    "Courses": [
-      {
-        "Degree": "B.Tech",
-        "Program": "Computer Science & Engineering"
-      },
-      {
-        "Degree": "B.Tech",
-        "Program": "Computer Science & Engineering (AI & ML)"
-      },
-      {
-        "Degree": "B.Tech",
-        "Program": "Computer Science & Engineering (Data Science)"
-      },
-      {
-        "Degree": "B.Tech",
-        "Program": "Information Technology"
-      }
-    ],
-    "ValueAddedServices": {
-      "Programs": [
-        {
-          "Name": "Finishing School",
-          "Cost": "Free",
-          "Selection": "Based on written test and previous academic year performance"
-        },
-        {
-          "Name": "Trishul",
-          "Cost": "Free",
-          "Selection": "Based on written test and previous academic year performance"
-        },
-        {
-          "Name": "SONET (School of New and Emerging Technologies)",
-          "Cost": "Free",
-          "Selection": "Based on written test and previous academic year performance"
-        },
-        {
-          "Name": "Bridge Courses",
-          "Courses": [
-            "Basic Communication Skills",
-            "Scratch Programming",
-            "Vocational Training Programs"
-          ],
-          "Details": "Compulsory for all I year students; students must opt for any two vocational training programs",
-          "Cost": "Free",
-          "InAdditionTo": "Regular University courses"
-        },
-        {
-          "Name": "Cambridge English’s Business English Certificates (BEC)",
-          "Cost": "Free",
-          "Registration": "First come, first serve basis"
-        }
-      ],
-      "Faculty": {
-        "Expertise": "Taught by faculty with expertise in respective areas",
-        "Development": "Management invests in Continued Professional Development (CPD) to keep faculty updated"
-      },
-      "Objective": "Enhance student skills and employability through specialized training"
+    {
+      "Degree": "B.Tech",
+      "Program": "Computer Science & Engineering (AI & ML)",
+      "Code": "CSM"
     },
-    "Achievements": [
+    {
+      "Degree": "B.Tech",
+      "Program": "Computer Science & Engineering (Data Science)",
+      "Code": "CSD"
+    },
+    {
+      "Degree": "B.Tech",
+      "Program": "Information Technology",
+      "Code": "IT"
+    }
+  ],
+  "ValueAddedServices": {
+    "Programs": [
       {
-        "Student": "G. Hasini",
-        "Program": "AIML",
-        "Year": "3rd",
-        "Achievement": "Selected for BCCI Senior Women’s One Day Cricket Team"
+        "Name": "Finishing School",
+        "Description": "Advanced training in soft skills, coding, and interview preparation to enhance employability.",
+        "Cost": 0,
+        "Selection": "Based on written test and previous academic year performance",
+        "TargetAudience": "Final year students"
       },
       {
-        "Student": "SreeLaya",
-        "Program": "IT",
-        "Batch": 2023,
-        "Achievement": "International offer with Amazon, Dublin, for 154,300 euros (1.2 cr INR)"
+        "Name": "Trishul",
+        "Description": "Specialized program focusing on leadership, teamwork, and project management skills.",
+        "Cost": 0,
+        "Selection": "Based on written test and previous academic year performance",
+        "TargetAudience": "Third and final year students"
       },
       {
-        "Students": [
-          "Nischal Singhi",
-          "Srinivas Yadav",
-          "Akash Konda",
-          "P Sai Varshith"
+        "Name": "SONET (School of New and Emerging Technologies)",
+        "Description": "Hands-on training in emerging technologies like IoT, Blockchain, and Cloud Computing.",
+        "Cost": 0,
+        "Selection": "Based on written test and previous academic year performance",
+        "TargetAudience": "All students"
+      },
+      {
+        "Name": "Bridge Courses",
+        "Courses": [
+          {
+            "Name": "Basic Communication Skills",
+            "Description": "Improves verbal and written communication for professional settings."
+          },
+          {
+            "Name": "Scratch Programming",
+            "Description": "Introduces programming concepts through visual coding."
+          },
+          {
+            "Name": "Vocational Training Programs",
+            "Description": "Choice of two programs (e.g., Web Development, Data Analytics) to build technical skills."
+          }
         ],
-        "Achievement": "Project proposals accepted by GSoC"
+        "Details": "Compulsory for all first-year students; students must opt for any two vocational training programs.",
+        "Cost": 0,
+        "InAdditionTo": "Regular university courses"
+      },
+      {
+        "Name": "Cambridge English Business English Certificates (BEC)",
+        "Description": "Certification program to improve business communication in English.",
+        "Cost": 0,
+        "Registration": "First come, first serve basis",
+        "TargetAudience": "All students"
       }
     ],
-    "Events": [
-      {
-        "Type": "Webinar",
-        "Title": "Security and Privacy Issues in the World of Cryptocurrencies and Modern Mobile OSes",
-        "Date": "06th April 2024",
-        "OrganizedBy": ["CSE", "IT"],
-        "ResourcePerson": "Dr. Ankit Gangwal"
-      }
-    ]
-  }
+    "Faculty": {
+      "Expertise": "Taught by faculty with expertise in respective areas",
+      "Development": "Management invests in Continued Professional Development (CPD) to keep faculty updated"
+    },
+    "Objective": "Enhance student skills and employability through specialized training"
+  },
+  "LastUpdated": "2025-05-01"
+}

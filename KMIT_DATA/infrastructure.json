@@ -1,169 +1,85 @@
 {
-    "Institution": {
-      "Name": "Keshav Memorial Institute of Technology (KMIT)",
-      "Address": "3-5-1026, Narayanguda, Hyderabad-500029, Telangana, India",
-      "Contact": {
-        "Email": "info@kmit.in",
-        "Phone": "040-23261407"
-      },
-      "Accreditation": {
-        "NAAC": "A Grade",
-        "NBA": "Accredited",
-        "AICTE": "Approved",
-        "Affiliation": "Jawaharlal Nehru Technological University Hyderabad (JNTUH)",
-        "Recognition": "Government of Telangana"
-      },
-      "EAPCET_Code": "KMIT",
-      "Established": 2007,
-      "PoweredBy": "Genesis Solutions Pvt Ltd"
-    },
-    "Courses": [
-      {
-        "Degree": "B.Tech",
-        "Program": "Computer Science & Engineering"
-      },
-      {
-        "Degree": "B.Tech",
-        "Program": "Computer Science & Engineering (AI & ML)"
-      },
-      {
-        "Degree": "B.Tech",
-        "Program": "Computer Science & Engineering (Data Science)"
-      },
-      {
-        "Degree": "B.Tech",
-        "Program": "Information Technology"
+  "EAPCET_Code": "KMIT",
+  "InstitutionDetails": {
+    "FullForm": "Keshav Memorial Institute of Technology",
+    "Location": {
+      "Street": "3-5-1026, Narayanguda",
+      "City": "Hyderabad",
+      "Pincode": "500029",
+      "State": "Telangana",
+      "Country": "India",
+      "Coordinates": {
+        "Latitude": 17.4045,
+        "Longitude": 78.4948
       }
-    ],
-    "SportsFacilities": {
-      "Philosophy": "Sports improve mental health, physical fitness, and personality skills like leadership, teamwork, communication, confidence, and discipline.",
-      "IndoorGames": [
-        {
-          "Name": "Badminton",
-          "Facility": "Professional-standard court behind Block B",
-          "Usage": "Faculty, staff, and students; annual competitions held"
-        },
-        {
-          "Name": "Yoga",
-          "Facility": "Coaching from 4-5:30 pm daily",
-          "Details": "Open to all students; Yoga team performs at external events"
-        },
-        {
-          "Name": "Chess, Table Tennis, Caroms",
-          "Facility": "Dedicated rooms above auditorium",
-          "Details": "Houses sports equipment; intra-college tournaments held"
-        }
-      ],
-      "OutdoorGames": [
-        {
-          "Name": "Football",
-          "Facility": "Large football field",
-          "Details": "Coaching from 4-5:30 pm daily; 12-member team; three intra-college events annually; participates in inter-collegiate competitions"
-        },
-        {
-          "Name": "Basketball",
-          "Facility": "Professional-standard court next to football field",
-          "Details": "Team participated in tournaments by BITS Hyderabad (24-27 Jan 2019) and Vidya Jyothi Institute (2-3 Apr 2019); hosted inter-college tournament at KMIT (17-18 Jan 2015) with 40 colleges"
-        },
-        {
-          "Name": "Volleyball",
-          "Facility": "Field next to basketball court",
-          "Details": "Coaching provided daily evening; intra-college events held periodically"
-        }
+    },
+    "CollegeTimings": {
+      "Description": "Typically 9:00 AM to 4:00 PM, Monday to Saturday. Subject to change based on academic schedule.",
+      "Note": "Contact administration for exact timings."
+    }
+  },
+  "Facilities": {
+    "Library": {
+      "Name": "KMIT Granthalaya",
+      "Resources": [
+        "Over 20,000 books",
+        "Access to e-journals and digital resources",
+        "Study areas and reading rooms"
       ]
     },
-    "AcademicActivities2024_25": [
+    "Laboratories": [
       {
-        "Month": "January-February",
-        "Activity": "Basic skill training for Basketball, Taekwondo, Volleyball, Kabaddi, etc."
+        "Department": "Computer Science & Engineering",
+        "Labs": [
+          "Programming Lab",
+          "Networking Lab",
+          "AI & ML Lab"
+        ]
       },
       {
-        "Month": "January-December",
-        "Activity": "Gym utilization by faculty from 3:30-4:45 pm"
-      },
-      {
-        "Month": "January-December",
-        "Activity": "Recreational activities for faculty based on their schedule"
-      },
-      {
-        "Month": "January-March",
-        "Activity": "Inter Branch Tournament"
-      },
-      {
-        "Month": "February",
-        "Activity": "Proposal to conduct Inter Collegiate Basketball Tournament at KMIT"
-      },
-      {
-        "Month": "February-December",
-        "Activity": "Organize fitness training sessions twice a week for students"
-      },
-      {
-        "Month": "March-April",
-        "Activity": "Organize Inter class competition twice or thrice a year; Conduct International Women’s Day"
-      },
-      {
-        "Month": "May",
-        "Activity": "Proposal to repair Volleyball Courts"
-      },
-      {
-        "Month": "June",
-        "Activity": "Organize event on International Yoga Day"
-      },
-      {
-        "Month": "May-June",
-        "Activity": "Yoga workshop and Yoga Day celebrations"
-      },
-      {
-        "Month": "August-September",
-        "Activity": "Form teams for Extra murals competitions; Selections for all games"
-      },
-      {
-        "Month": "August-December",
-        "Activity": "Participate in State, National, and International Tournaments"
-      },
-      {
-        "Month": "September",
-        "Activity": "Students Induction Program"
-      },
-      {
-        "Month": "October-November",
-        "Activity": "Proposal to conduct Inter Keshav Memorial Engg. College Sports Meet"
-      },
-      {
-        "Month": "October-December",
-        "Activity": "Participate in tournaments organized by other engineering colleges and universities"
+        "Department": "Information Technology",
+        "Labs": [
+          "Web Development Lab",
+          "Database Lab"
+        ]
       }
     ],
-    "Achievements": [
+    "Sports": {
+      "Indoor": [
+        "Table Tennis",
+        "Chess",
+        "Carroms"
+      ],
+      "Outdoor": [
+        "Cricket",
+        "Football",
+        "Basketball",
+        "Volleyball"
+      ]
+    },
+    "OtherAmenities": [
       {
-        "Student": "G. Hasini",
-        "Program": "AIML",
-        "Year": "3rd",
-        "Achievement": "Selected for BCCI Senior Women’s One Day Cricket Team"
+        "Name": "Auditorium",
+        "Capacity": "500 seats",
+        "Features": ["Audio-visual equipment", "Air-conditioned"]
       },
       {
-        "Student": "SreeLaya",
-        "Program": "IT",
-        "Batch": 2023,
-        "Achievement": "International offer with Amazon, Dublin, for 154,300 euros (1.2 cr INR)"
+        "Name": "Cafeteria",
+        "Features": ["Hygienic food", "Variety of cuisines"]
       },
       {
-        "Students": [
-          "Nischal Singhi",
-          "Srinivas Yadav",
-          "Akash Konda",
-          "P Sai Varshith"
-        ],
-        "Achievement": "Project proposals accepted by GSoC"
+        "Name": "Transport",
+        "Details": "Bus services across Hyderabad"
       }
     ],
-    "Events": [
-      {
-        "Type": "Webinar",
-        "Title": "Security and Privacy Issues in the World of Cryptocurrencies and Modern Mobile OSes",
-        "Date": "06th April 2024",
-        "OrganizedBy": ["CSE", "IT"],
-        "ResourcePerson": "Dr. Ankit Gangwal"
-      }
-    ]
-  }
+    "Campus": {
+      "Size": "Approximately 80,000 square feet",
+      "Features": [
+        "Wi-Fi enabled",
+        "Smart classrooms",
+        "Green spaces"
+      ]
+    }
+  },
+  "LastUpdated": "2025-05-01"
+}

@@ -1,21 +1,27 @@
 const jwt = require('jsonwebtoken');
 
-     function checkForAuthenticationCookie(cookieName) {
-         return (req, res, next) => {
-             const token = req.cookies[cookieName];
-             if (!token) {
-                 req.user = null;
-                 return next();
-             }
-             try {
-                 const payload = jwt.verify(token, 'your_jwt_secret'); // Replace with your JWT secret
-                 req.user = payload;
-                 next();
-             } catch (e) {
-                 req.user = null;
-                 next();
-             }
-         };
-     }
+const JWT_SECRET = 'hacunamatata';
 
-     module.exports = { checkForAuthenticationCookie };
+function checkForAuthenticationCookie(cookieName) {
+    return (req, res, next) => {
+        console.log('Cookies:', req.cookies);
+        const token = req.cookies[cookieName];
+        console.log('Token:', token);
+        if (!token) {
+            req.user = null;
+            return next();
+        }
+        try {
+            const payload = jwt.verify(token, JWT_SECRET);
+            console.log('Verified payload:', payload);
+            req.user = payload;
+            next();
+        } catch (e) {
+            console.error('JWT verification error:', e.message);
+            req.user = null;
+            next();
+        }
+    };
+}
+
+module.exports = { checkForAuthenticationCookie };

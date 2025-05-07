@@ -1,12 +1,14 @@
 const jwt = require('jsonwebtoken');
 
-     function createTokenForUser(user) {
-         const payload = {
-             _id: user._id,
-             username: user.username,
-             email: user.email
-         };
-         return jwt.sign(payload, 'your_jwt_secret', { expiresIn: '1h' }); // Replace with your JWT secret
-     }
+const JWT_SECRET = 'hacunamatata';
 
-     module.exports = { createTokenForUser };
+function createTokenForUser(user) {
+    const payload = {
+        id: user._id,
+        username: user.username,
+        email: user.email
+    };
+    return jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
+}
+
+module.exports = { createTokenForUser };

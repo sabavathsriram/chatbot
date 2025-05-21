@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIDYASAARATHI Chatbot</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.7/purify.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(135deg, #e0e7ff, #f0f2f5);
+      height: 100vh;
+    }
+    .navbar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background: #1a1a1a;
+      color: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+    .menu-icon i {
+      font-size: 22px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .menu-icon i:hover {
+      transform: scale(1.2);
+    }
+    .title {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      flex: 1;
+      letter-spacing: 1px;
+    }
+    .clear-chat {
+      background: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+    .clear-chat:hover {
+      background: #cc0000;
+    }
+    .chat-container {
+      width: 90%;
+      max-width: 600px;
+      flex-grow: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+      max-height: 65vh;
+      border-radius: 15px;
+      background: white;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+      margin-top: 20px;
+    }
+    .message {
+      max-width: 85%;
+      padding: 12px 16px;
+      border-radius: 15px;
+      font-size: 14px;
+      word-wrap: break-word;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .message:hover {
+      transform: scale(1.02);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    .bot {
+      background: #e1f5fe;
+      align-self: flex-start;
+      animation: slideIn 0.3s ease-out;
+    }
+    .user {
+      background: #d1e7dd;
+      align-self: flex-end;
+      animation: slideIn 0.3s ease-out;
+    }
+    @keyframes slideIn {
+      from { transform: translateX(50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    .typing {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-style: italic;
+      color: gray;
+    }
+    .spinner {
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #3498db;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .response-container {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin: 10px 0;
+    }
+    .response-container h1 {
+      font-size: 18px;
+      color: #1a1a1a;
+      margin-bottom: 15px;
+      text-align: center;
+      font-weight: 600;
+    }
+    .response-container p,
+    .response-container ul {
+      font-size: 14px;
+      color: #333;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    .response-container b {
+      font-weight: bold;
+      color: #1a1a1a;
+    }
+    .response-container ul {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+    .response-container li {
+      margin-bottom: 5px;
+    }
+    .response-container a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .response-container a:hover {
+      text-decoration: underline;
+      color: #0056b3;
+    }
+    .contact {
+      font-style: italic;
+      text-align: center;
+      color: #555;
+      margin-top: 10px;
+    }
+    .faq-section {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .faq-section h3 {
+      font-size: 16px;
+      color: #1a1a1a;
+      margin-bottom: 15px;
+    }
+    .faq-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .faq-buttons button {
+      background: linear-gradient(135deg, #333, #555);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .faq-buttons button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .chat-input {
+      width: 90%;
+      max-width: 600px;
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background: white;
+      border-radius: 30px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      position: fixed;
+      bottom: 10px;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 30px;
+      background: #f1f1f1;
+      outline: none;
+      font-size: 16px;
+      margin-right: 50px;
+    }
+    .send-btn {
+      position: absolute;
+      right: 15px;
+      background: #1a1a1a;
+      border: none;
+      padding: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      width: 40px;
+      height: 40px;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .send-btn:hover {
+      background: #333;
+      transform: scale(1.1);
+    }
+    datalist {
+      position: absolute;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      max-height: 150px;
+      overflow-y: auto;
+      width: 300px;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="menu-icon"><i class="fas fa-bars"></i></div>
+    <div class="title" id="title">VIDYASAARATHI</div>
+    <button class="clear-chat" onclick="clearChat()"><i class="fas fa-trash"></i> Clear Chat</button>
+  </nav>
+  <div class="chat-container" id="chatbox">
+    <div class="message bot" id="initialMessage">
+      <div class="response-container">
+        <h1>Welcome to VIDYASAARATHI</h1>
+        <p>Hello! I’m your college assistant for Keshav Memorial Institute of Technology (KMIT). I can help you with information about <b>admissions</b>, <b>courses</b>, <b>faculty</b>, <b>exams</b>, <b>placements</b>, <b>campus facilities</b>, <b>administration</b>, or calculate <b>distance</b> from KMIT to any location in India. Ask away!</p>
+        <p class="contact">Visit the <a href="https://www.kmit.in" target="_blank">KMIT Official Website</a> for further assistance.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq-section">
+    <h3>Quick Questions</h3>
+    <div class="faq-buttons" id="faqButtons">
+      <button onclick="sendFAQ('Tell me about Admissions')"><i class="fas fa-user-graduate"></i> Admissions</button>
+      <button onclick="sendFAQ('Tell me about Placements')"><i class="fas fa-briefcase"></i> Placements</button>
+      <button onclick="sendFAQ('Tell me about Campus Facilities')"><i class="fas fa-building"></i> Campus Facilities</button>
+      <button onclick="sendFAQ('Distance from KMIT to Uppal')"><i class="fas fa-map-marker-alt"></i> Distance to Uppal</button>
+    </div>
+  </div>
+  <div class="chat-input">
+    <input type="text" id="userInput" placeholder="Ask your question here!" list="locations" oninput="handleInput(event)" onkeypress="handleKeyPress(event)">
+    <datalist id="locations"></datalist>
+    <button class="send-btn" id="sendBtn">➜</button>
+  </div>
+
+  <script>
+    // Local fallback list for Hyderabad locations
+    const HYDERABAD_LOCATIONS = [
+      "LB Nagar", "Dilsukhnagar", "Uppal", "Kukatpally", "HiTech City",
+      "Banjara Hills", "Jubilee Hills", "Ameerpet"
+    ];
+
+    // Session ID for conversation history
+    let sessionId = null;
+
+    // Enhanced markdown parser
+    function parseMarkdown(text) {
+      text = text.replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+      text = text.replace(/\*\*([^\*]+)\*\*/g, "<b>$1</b>");
+      text = text.replace(/\n\s*-\s+([^\n]+)/g, "<li>$1</li>");
+      text = text.replace(/(<li>.*<\/li>)/g, "<ul>$1</ul>");
+      text = text.replace(/\n/g, "<br>");
+      return text;
+    }
+
+    // Format response into structured HTML
+    function formatResponse(query, answer) {
+      const queryLower = query.toLowerCase();
+      let title = "KMIT Information";
+      if (queryLower.includes("admissions")) title = "KMIT Admissions Information";
+      else if (queryLower.includes("placements")) title = "KMIT Placements Information";
+      else if (queryLower.includes("faculty")) title = "KMIT Faculty Information";
+      else if (queryLower.includes("campus facilities")) title = "KMIT Campus Facilities Information";
+      else if (queryLower.includes("distance") || queryLower.includes("how far") || queryLower.includes("km from")) title = "Distance from KMIT";
+      else if (queryLower.includes("courses")) title = "KMIT Courses Information";
+      else if (queryLower.includes("exams")) title = "KMIT Exams & Regulations Information";
+      else if (queryLower.includes("administration")) title = "KMIT Administration Information";
+
+      return `
+        <div class="response-container">
+          <h1>${title}</h1>
+          <p>${answer}</p>
+          <p class="contact">Visit the <a href="https://www.kmit.in" target="_blank">KMIT Official Website</a> for further assistance.</p>
+        </div>
+      `;
+    }
+
+    // Detect if query is distance-related
+    function isDistanceQuery(query) {
+      const queryLower = query.toLowerCase();
+      return queryLower.includes("distance") || queryLower.includes("how far") || queryLower.includes("km from") || queryLower.includes("miles from");
+    }
+
+    // Extract location from distance query
+    function extractLocation(query) {
+      const queryLower = query.toLowerCase();
+      const patterns = [
+        /distance\s+from\s+kmit\s+to\s+(.+)/i,
+        /how\s+far\s+is\s+kmit\s+from\s+(.+)/i,
+        /km\s+from\s+kmit\s+to\s+(.+)/i,
+        /miles\s+from\s+kmit\s+to\s+(.+)/i
+      ];
+      for (const pattern of patterns) {
+        const match = query.match(pattern);
+        if (match) return match[1].trim();
+      }
+      return query;
+    }
+
+    // Debounce function to limit API calls
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+
+    // Fetch location suggestions from Nominatim
+    async function fetchLocationSuggestions(query) {
+      try {
+        const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query + ", Hyderabad")}&format=json&limit=10&addressdetails=1`;
+        const response = await fetch(url, {
+          headers: { "User-Agent": "KMITChatbot/1.0 (contact: info@kmit.in)" }
+        });
+        if (!response.ok) throw new Error(`Nominatim API error: ${response.status}`);
+        const results = await response.json();
+        const suggestions = results
+          .filter(result => 
+            result.address && (
+              result.address.city === "Hyderabad" || 
+              result.address.state === "Telangana" ||
+              result.address.county === "Hyderabad"
+            )
+          )
+          .map(result => result.display_name.split(",")[0].trim());
+        if (!suggestions.length) {
+          return HYDERABAD_LOCATIONS.filter(loc => 
+            loc.toLowerCase().includes(query.toLowerCase())
+          );
+        }
+        return suggestions;
+      } catch (error) {
+        console.error("Error fetching location suggestions:", error);
+        return HYDERABAD_LOCATIONS.filter(loc => 
+          loc.toLowerCase().includes(query.toLowerCase())
+        );
+      }
+    }
+
+    // Handle input for autocomplete
+    const handleInput = debounce(async function(event) {
+      const input = event.target.value.trim();
+      const datalist = document.getElementById("locations");
+      datalist.innerHTML = "";
+
+      if (isDistanceQuery(input)) {
+        const locationPart = extractLocation(input);
+        if (locationPart.length < 1) return;
+        const suggestions = await fetchLocationSuggestions(locationPart);
+        suggestions.forEach(loc => {
+          const option = document.createElement("option");
+          option.value = `Distance from KMIT to ${loc}`;
+          datalist.appendChild(option);
+        });
+      }
+    }, 500);
+
+    async function getAnswer(query) {
+      try {
+        const endpoint = isDistanceQuery(query) ? 'http://localhost:8001/distance' : 'http://localhost:8001/query';
+        const body = isDistanceQuery(query) ? { location: extractLocation(query) } : { query, session_id: sessionId };
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+        if (!response.ok) throw new Error(`HTTP status ${response.status}`);
+        const data = await response.json();
+        if (!data.answer) throw new Error('No answer received from server');
+        sessionId = data.session_id || sessionId;  // Update session ID
+        return {
+          answer: DOMPurify.sanitize(parseMarkdown(data.answer), { ADD_TAGS: ['a', 'ul', 'li', 'b'], ADD_ATTR: ['href', 'target'] }),
+          confidence: data.confidence || 0.0
+        };
+      } catch (error) {
+        console.error('Fetch error for query "' + query + '":', error.message);
+        return {
+          answer: DOMPurify.sanitize(
+            'Sorry, something went wrong: Failed to fetch. Visit the <a href="https://www.kmit.in" target="_blank">KMIT Official Website</a> for assistance.'
+          ),
+          confidence: 0.0
+        };
+      }
+    }
+
+    function handleKeyPress(event) {
+      if (event.key === "Enter") {
+        document.getElementById("sendBtn").click();
+      }
+    }
+
+    async function sendFAQ(query) {
+      document.getElementById("userInput").value = query;
+      await document.getElementById("sendBtn").click();
+    }
+
+    function clearChat() {
+      const chatBox = document.getElementById("chatbox");
+      chatBox.innerHTML = `
+        <div class="message bot" id="initialMessage">
+          <div class="response-container">
+            <h1>Welcome to VIDYASAARATHI</h1>
+            <p>Hello! I’m your college assistant for Keshav Memorial Institute of Technology (KMIT). I can help you with information about <b>admissions</b>, <b>courses</b>, <b>faculty</b>, <b>exams</b>, <b>placements</b>, <b>campus facilities</b>, <b>administration</b>, or calculate <b>distance</b> from KMIT to any location in India. Ask away!</p>
+            <p class="contact">Visit the <a href="https://www.kmit.in" target="_blank">KMIT Official Website</a> for further assistance.</p>
+          </div>
+        </div>
+      `;
+      sessionId = null; // Reset session ID
+    }
+
+    document.getElementById("sendBtn").addEventListener("click", async function () {
+      const query = document.getElementById("userInput").value.trim();
+      if (!query) return alert("Please enter a question!");
+
+      let chatBox = document.getElementById("chatbox");
+      let userMessage = document.createElement("div");
+      userMessage.classList.add("message", "user");
+      userMessage.textContent = query;
+      chatBox.appendChild(userMessage);
+      chatBox.scrollTop = chatBox.scrollHeight;
+      document.getElementById("userInput").value = "";
+
+      let typingIndicator = document.createElement("div");
+      typingIndicator.classList.add("message", "bot", "typing");
+      typingIndicator.innerHTML = '<div class="spinner"></div> Loading...';
+      chatBox.appendChild(typingIndicator);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      let { answer } = await getAnswer(query);
+      chatBox.removeChild(typingIndicator);
+      let botMessage = document.createElement("div");
+      botMessage.classList.add("message", "bot");
+      botMessage.innerHTML = formatResponse(query, answer);
+      chatBox.appendChild(botMessage);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    });
+  </script>
+</body>
+</html>

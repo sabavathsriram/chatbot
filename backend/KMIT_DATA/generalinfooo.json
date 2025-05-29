@@ -1,0 +1,143 @@
+{
+  "KMIT": {
+    "Cutoff_Ranks": {
+      "2023": {
+        "CSE": {
+          "OC": "3255–3261",
+          "SC": "33728–34493",
+          "ST": "20663–34509",
+          "BCB": "8019–9127"
+        },
+        "CSE_AI_ML": {
+          "OC": "3605–3608"
+        },
+        "CSE_Data_Science": {
+          "OC": "4060"
+        },
+        "IT": {
+          "OC": "4480"
+        },
+        "Note": "SC/ST/BC cutoffs are higher (less competitive). 2025 cutoffs to be released post-TS EAMCET (May 2025). Check kmit.in or TS EAMCET portals."
+      }
+    },
+    "Academic_and_Disciplinary_Policies": {
+      "Attendance": "75% mandatory (JNTUH standard)",
+      "Anti_Ragging": "Strict no-ragging policy, anti-ragging committee",
+      "Environment": "Faculty approachable, campus peaceful, focus on coding and professional skills via Project School and Finishing School, clubs offer flexibility",
+      "Placements": "97.67% placement rate in 2024"
+    },
+    "Student_Strength_and_Sections": {
+      "Total_Intake": "~1200 students",
+      "Departments": {
+        "CSE": {
+          "Students": "~420",
+          "Sections": "~6"
+        },
+        "IT": {
+          "Students": "120",
+          "Sections": "~2"
+        },
+        "CSE_AI_ML": {
+          "Students": "~120–180",
+          "Sections": "~2–3"
+        },
+        "CSE_Data_Science": {
+          "Students": "~120–180",
+          "Sections": "~2–3"
+        },
+        "Section_Size": "60–70 students",
+        "Note": "Exact counts unavailable on kmit.in; contact academic office"
+      }
+    },
+    "Student_Life": {
+      "Academics": "Focus on CSE, coding via Trishul and Project School",
+      "Extracurriculars": {
+        "Clubs": ["Dance", "Music", "Art", "Coding"],
+        "Sports": ["Basketball", "Volleyball"],
+        "Events": ["Cultural fests", "Technical fests (e.g., Tessellator)", "Sports meets"]
+      },
+      "Campus": {
+        "Location": "Narayanguda, Hyderabad",
+        "Size": "6 acres",
+        "Accessibility": "Metro/bus",
+        "Hostel": "No on-campus hostel, private hostels nearby"
+      },
+      "Vibe": "Awesome, safe"
+    },
+    "Hostel_Facilities": {
+      "On_Campus": "None (6-acre campus)",
+      "Nearby": "Private hostels/PG in Narayanguda, ~1–2 km, ~₹50,000–₹80,000/year, with single/double-sharing, mess, Wi-Fi, security",
+      "Recommendation": "Contact KMIT or use platforms like FlatMatch"
+    },
+    "Fee_Structure": {
+      "2024_25": {
+        "Tuition_Fee": "₹103,000/year",
+        "Special_Fee": {
+          "Year_1": "₹5,500",
+          "Years_2_4": "₹2,500"
+        },
+        "NBA_Fee": "₹3,000/year",
+        "Total": {
+          "Year_1": "~₹111,500",
+          "Years_2_4": "~₹108,000"
+        },
+        "Hostel_Cost": "₹50,000–₹80,000/year (private hostels)",
+        "Scholarships": "Available for SC/ST (TS EAMCET rank <10,000, full reimbursement) and meritorious/economically weaker students",
+        "Note": "Check kmit.in for updates"
+      }
+    },
+    "Events": {
+      "Types": ["Cultural festivals (e.g., annual day)", "Technical fests (e.g., Tessellator, hackathons)", "Sports meets (e.g., June 2024)", "Club events (dance, music, art)", "Industry workshops (via NGIT, T-HUB)"],
+      "Note": "Check kmit.in or student council for 2025 calendar"
+    },
+    "Campus_Size": "6 acres",
+    "Anti_Ragging_Policy": {
+      "Compliance": "Follows UGC regulations, strict no-ragging policy, anti-ragging committee",
+      "Safety": "Campus considered safe by students",
+      "Note": "Contact administration for policy document"
+    },
+    "College_Timings": {
+      "Typical": "9:00 AM–4:00 PM, Monday–Saturday (JNTUH standard)",
+      "Extended": "Labs/clubs may extend to 5:00 PM",
+      "Note": "Contact academic office for 2025 schedule"
+    },
+    "Counseling_and_Mental_Health": {
+      "On_Campus": "No dedicated counseling mentioned; student welfare committees/faculty advisors available",
+      "Medical": "Campus clinic for first-aid",
+      "External": "Counseling services accessible in Hyderabad",
+      "Note": "Contact KMIT for details"
+    },
+    "Faculty": {
+      "Description": "Friendly, approachable, supportive; many highly qualified, some own companies",
+      "Teaching": "Encourage interaction, practical learning via Project School",
+      "Environment": "Positive, teaching styles vary"
+    },
+    "Teaching_Methods": {
+      "Approach": "Blend of laptop-based and traditional",
+      "Laptop_Use": "Coding labs, Project School (Python, AI/ML), Wi-Fi, smart boards",
+      "Traditional": "Whiteboards for theory",
+      "Focus": "Significant laptop use due to CSE emphasis"
+    },
+    "Curriculum_Focus": {
+      "Primary": "Coding/tech subjects (JavaScript, Python, AI/ML) via Trishul, Project School, SONET",
+      "Secondary": "Core subjects (mathematics, physics), soft skills",
+      "Compliance": "Meets JNTUH requirements, placement-oriented"
+    },
+    "Extracurriculars": {
+      "Balance": "Equal focus on academics and extracurriculars",
+      "Activities": ["Dance, music, art, coding clubs", "Sports (basketball, volleyball)", "Cultural/technical fests"],
+      "Limitation": "Small campus limits large-scale sports"
+    },
+    "Placements": {
+      "Process": "Placement Cell invites companies, organizes drives, provides training (coding, aptitude, interviews) via Finishing School",
+      "Recruiters": ["Amazon", "Google", "Microsoft", "Deloitte"],
+      "2024_Stats": {
+        "Placement_Rate": "97.67% (546/655 students)",
+        "Offers": "791",
+        "Highest_Package": "₹122 LPA",
+        "Average_Package": "₹8.76 LPA"
+      },
+      "Approach": "On-campus/virtual tests and interviews, driven by CSE focus and industry ties"
+    }
+  }
+}

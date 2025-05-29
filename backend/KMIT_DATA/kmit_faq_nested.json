@@ -1,0 +1,37 @@
+{
+  "college": "KMIT",
+  "faq": {
+    "admissions": {
+      "cutoff_ranks_by_category_and_branch": "The cutoff ranks vary by branch, category, and year based on TS EAMCET. For 2023: CSE: OC 3255\u20133261, SC ~33728\u201334493, ST ~20663\u201334509, BCB 8019\u20139127. AI & ML: 3605\u20133608. Data Science: 4060. IT: 4480.",
+      "cutoff_ranks_oc_sc": "OC: CSE 3255\u20133261, AI & ML 3605\u20133613, Data Science 4060, IT 4480. SC: CSE ~33728\u201334493. Other branches higher. 2025 cutoffs post TS EAMCET.",
+      "fee_structure": "2024\u201325: \u20b9103,000 tuition/year; \u20b95,500 special fee (1st year), \u20b92,500 (others); \u20b93,000 NBA fee/year. Total: ~\u20b9111,500 (1st year), ~\u20b9108,000 (2nd\u20134th). Private hostels: \u20b950k\u2013\u20b980k/year. Scholarships available."
+    },
+    "campus_life": {
+      "student_life": "Vibrant academics with coding focus (Trishul, Project School). Clubs (dance, music, art), sports (basketball, volleyball). Events (cultural, technical). Campus is safe and metro accessible.",
+      "events": "Cultural fests, technical fests (Tessellator, hackathons), sports meets. Clubs organize events. MoUs with NGIT and T-HUB enable workshops.",
+      "extracurricular_activities": "Dance, music, art, coding clubs; sports and cultural fests. Academics dominate due to small campus size.",
+      "counseling_support": "No official mention, but typical JNTUH provisions include welfare committees/faculty advisors. First-aid clinic available. External services accessible."
+    },
+    "infrastructure": {
+      "campus_area": "Approx. 6 acres in Narayanguda, Hyderabad.",
+      "hostel_facility": "No on-campus hostel due to small size. Students use nearby private hostels/PGs.",
+      "nearby_hostels": "Available within 1\u20132 km, offering rooms, mess, Wi-Fi, security for \u20b950k\u2013\u20b980k/year."
+    },
+    "academics": {
+      "strictness": "Balanced discipline. 75% attendance required. Anti-ragging enforced. Clubs and placement stats indicate structured yet flexible approach.",
+      "faculty_approachability": "Friendly, supportive, some own companies. Promote interaction and practical learning.",
+      "teaching_methods": "Mix of laptop-based and traditional. Coding labs (Python, AI/ML) and whiteboard theory.",
+      "subject_focus": "Priority on coding/technical subjects via Trishul, Project School, SONET. Core subjects and soft skills are included but secondary."
+    },
+    "structure": {
+      "student_strength_and_sections": "Intake ~1200 students: CSE ~420 (6 sections), IT ~120 (2), AI & ML / Data Science ~120\u2013180 each (2\u20133 sections). 60\u201370 students/section."
+    },
+    "policies": {
+      "anti_ragging": "Strict UGC-compliant policy. Anti-ragging committee in place. Campus is safe.",
+      "college_timings": "Typically 9:00 AM to 4:00 PM (Mon\u2013Sat), may extend to 5:00 PM for labs/clubs."
+    },
+    "placements": {
+      "company_engagement": "Placement Cell manages drives, training (coding, aptitude, interview). 2024: 97.67% placed (546/655), 791 offers, \u20b9122 LPA max, \u20b98.76 LPA avg. Recruiters include Amazon, Google, Microsoft, Deloitte."
+    }
+  }
+}

@@ -4,9 +4,10 @@ from pydub import AudioSegment
 from google.cloud import speech
 import logging
 import os
+from google.api_core.exceptions import GoogleAPIError
 
 # Configuration
-SERVICE_ACCOUNT_KEY = "fiery-muse-457504-c5-921b7558860b.json"
+SERVICE_ACCOUNT_KEY = "kmitstt-34483a53f9e8.json"
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = SERVICE_ACCOUNT_KEY
 RAW_AUDIO_FILE = "raw_audio.wav"
 CONVERTED_AUDIO_FILE = "converted.wav"
@@ -79,6 +80,9 @@ def transcribe_with_google(wav_file=CONVERTED_AUDIO_FILE):
         transcription = " ".join(transcriptions)
         logger.info(f"📝 Transcription result: {transcription}")
         return transcription if transcription else "No speech detected"
+    except GoogleAPIError as e:
+        logger.error(f"Google API error: {str(e)}", exc_info=True)
+        return f"Transcription failed: {str(e)}"
     except Exception as e:
-        logger.error(f"Transcription error: {str(e)}", exc_info=True)
+        logger.error(f"Unexpected error: {str(e)}", exc_info=True)
         return "No speech detected"

@@ -21,8 +21,20 @@ from main import record_audio, convert_to_16khz_mono, transcribe_with_google
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
-# Load environment variables
+# Load environment variables (for local development)
 load_dotenv(dotenv_path=r"D:\OneDrive\Desktop\projects\chatbot\backend\.env")
+
+# Handle Google Cloud credentials for Render
+if os.getenv("GOOGLE_CREDENTIALS"):
+    credentials_path = "/app/kmitstt-34483a53f9e8.json"
+    try:
+        with open(credentials_path, "w") as f:
+            json.dump(json.loads(os.getenv("GOOGLE_CREDENTIALS")), f)
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentials_path
+        logger.info(f"Wrote Google Cloud credentials to {credentials_path}")
+    except Exception as e:
+        logger.error(f"Failed to write Google Cloud credentials: {str(e)}")
+        raise
 
 app = FastAPI(title="KMIT Chatbot",
               description="Chatbot for KMIT queries using RAG with Gemini AI and distance calculation")
@@ -34,7 +46,6 @@ app.add_middleware(
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
-
 # Directories and constants
 DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "kmit_data")
 PERSIST_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "db")

@@ -1,18 +1,26 @@
 FROM python:3.11-slim
 
-  RUN apt-get update && apt-get install -y \
-      portaudio19-dev \
-      gcc \
-      python3-dev \
-      && rm -rf /var/lib/apt/lists/*
+# Install system dependencies for pyaudio
+RUN apt-get update && apt-get install -y \
+    portaudio19-dev \
+    gcc \
+    python3-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-  WORKDIR /app
+# Set working directory
+WORKDIR /app
 
-  COPY requirements.txt .
-  RUN pip install --no-cache-dir -r requirements.txt
+# Copy requirements.txt
+COPY requirements.txt .
 
-  COPY . .
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-  EXPOSE 8001
+# Copy application code
+COPY . .
 
-  CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8001"]
+# Expose port
+EXPOSE 8001
+
+# Command to run the FastAPI application
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8001"]

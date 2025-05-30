@@ -1,0 +1,81 @@
+# Node.js dependencies
+/frontend/node_modules/
+/frontend/package-lock.json
+
+# Python virtual environments and caches
+/backend/fastapi_server/__pycache__/
+/backend/fastapi_server/.venv/
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+.Python
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+*.egg
+MANIFEST
+
+# Environment variable files (sensitive info)
+*.env
+.env.*
+.envrc
+
+# Google Cloud credentials
+fiery-muse-457504-c5-921b7558860b.json
+
+# Temporary audio files
+raw_audio.wav
+converted.wav
+
+# ChromaDB persistence directory
+db/
+
+# KMIT data directory (if sensitive or large)
+kmit_data/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Build/output directories
+dist/
+build/
+
+# IDE/editor specific files
+.vscode/
+.idea/
+*.swp
+
+# Test/coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Yarn (if used)
+yarn-debug.log*
+yarn-error.log*
+
+# Render-specific files
+.render/
+
+# Docker-specific files (optional)
+Dockerfile.dev
+docker-compose.yml
+*.dockerignore

@@ -8,20 +8,17 @@ RUN apt-get update && apt-get install -y \
     ffmpeg \
     && rm -rf /var/lib/apt/lists/*
 
-# Set working directory
 WORKDIR /app
 
-# Copy requirements.txt (adjust path if needed)
-COPY requirements.txt .
+COPY fastapi_server/requirements.txt ./fastapi_server/requirements.txt
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r fastapi_server/requirements.txt
 
-# Copy all application code (adjust as needed)
 COPY . .
 
-# Expose port (match your CMD)
+# Now set working directory to fastapi_server
+WORKDIR /app/fastapi_server
+
 EXPOSE 8001
 
-# Command to run the FastAPI application (adjust path if needed)
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8001"]

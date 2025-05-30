@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+pymongo
+chromadb
+requests
+pydantic
+fuzzywuzzy
+psutil
+pyaudio
+pydub
+google-cloud-speech
+langchain
+langchain-chroma
+langchain-huggingface

@@ -1,0 +1,70 @@
+# Node.js dependencies
+/frontend/node_modules/
+/frontend/package-lock.json
+
+# Python virtual environments and caches
+/backend/fastapi_server/__pycache__/
+/backend/fastapi_server/.venv/
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Environment variable files (sensitive info)
+*.env
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Build/output directories (if any)
+dist/
+build/
+
+# IDE/editor specific files
+.vscode/
+.idea/
+*.swp
+
+# macOS Finder files
+.DS_Store
+
+# Windows thumbnail cache
+Thumbs.db
+
+# Python distribution/packaging
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+*.egg
+MANIFEST
+.Python
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Test/coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Yarn (if you ever use it)
+yarn-debug.log*
+yarn-error.log*
+
+# Miscellaneous
+.env.*
+.envrc

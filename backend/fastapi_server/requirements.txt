@@ -13,3 +13,10 @@ google-cloud-speech
 langchain
 langchain-chroma
 langchain-huggingface
+python-dotenv
+   
+  
+   requests
+   
+   
+   

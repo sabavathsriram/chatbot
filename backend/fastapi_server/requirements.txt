@@ -1,22 +1,11 @@
-fastapi
-uvicorn[standard]
 python-dotenv
-pymongo
-chromadb
-requests
-pydantic
-fuzzywuzzy
-psutil
 pyaudio
 pydub
 google-cloud-speech
-langchain
+requests
+fastapi
+uvicorn
 langchain-chroma
 langchain-huggingface
-python-dotenv
-   
-  
-   requests
-   
-   
-   
+fuzzywuzzy
+psutil

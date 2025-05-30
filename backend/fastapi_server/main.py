@@ -4,18 +4,47 @@ from pydub import AudioSegment
 from google.cloud import speech
 import logging
 import os
+import json
 from google.api_core.exceptions import GoogleAPIError
+from dotenv import load_dotenv
+
+# Load environment variables from .env file (for local development)
+load_dotenv(dotenv_path=r"D:\OneDrive\Desktop\projects\chatbot\backend\.env")
 
 # Configuration
-SERVICE_ACCOUNT_KEY = "kmitstt-34483a53f9e8.json"
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = SERVICE_ACCOUNT_KEY
-RAW_AUDIO_FILE = "raw_audio.wav"
-CONVERTED_AUDIO_FILE = "converted.wav"
+SERVICE_ACCOUNT_KEY = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+RAW_AUDIO_FILE = os.getenv("RAW_AUDIO_FILE", "raw_audio.wav")
+CONVERTED_AUDIO_FILE = os.getenv("CONVERTED_AUDIO_FILE", "converted.wav")
 RECORD_SECONDS = 4
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
+
+# Handle Google Cloud credentials for Render
+if os.getenv("GOOGLE_CREDENTIALS"):
+    # Render provides credentials as an environment variable
+    credentials_path = "/app/kmitstt-34483a53f9e8.json"
+    try:
+        with open(credentials_path, "w") as f:
+            json.dump(json.loads(os.getenv("GOOGLE_CREDENTIALS")), f)
+        SERVICE_ACCOUNT_KEY = credentials_path
+        logger.info(f"Wrote Google Cloud credentials to {credentials_path}")
+    except Exception as e:
+        logger.error(f"Failed to write Google Cloud credentials: {str(e)}")
+        raise
+
+# Verify Google Cloud credentials
+if not SERVICE_ACCOUNT_KEY:
+    logger.error("GOOGLE_APPLICATION_CREDENTIALS not found in environment variables")
+    raise ValueError("GOOGLE_APPLICATION_CREDENTIALS must be set")
+if not os.path.isfile(SERVICE_ACCOUNT_KEY):
+    logger.error(f"Service account key file not found at: {SERVICE_ACCOUNT_KEY}")
+    raise FileNotFoundError(f"Service account key file not found at: {SERVICE_ACCOUNT_KEY}")
+
+# Set Google Cloud credentials
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = SERVICE_ACCOUNT_KEY
+logger.info(f"Set GOOGLE_APPLICATION_CREDENTIALS to: {SERVICE_ACCOUNT_KEY}")
 
 def record_audio(output_filename=RAW_AUDIO_FILE, record_seconds=RECORD_SECONDS):
     chunk = 1024
@@ -86,3 +115,9 @@ def transcribe_with_google(wav_file=CONVERTED_AUDIO_FILE):
     except Exception as e:
         logger.error(f"Unexpected error: {str(e)}", exc_info=True)
         return "No speech detected"
+
+if __name__ == "__main__":
+    recorded_file = record_audio()
+    converted_file = convert_to_16khz_mono(recorded_file)
+    transcription = transcribe_with_google(converted_file)
+    print(f"Transcription: {transcription}")

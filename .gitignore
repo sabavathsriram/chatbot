@@ -80,3 +80,7 @@ yarn-error.log*
 Dockerfile.dev
 docker-compose.yml
 *.dockerignore
+
+# Windows-specific Python executable cache
+*.exe
+Scripts/

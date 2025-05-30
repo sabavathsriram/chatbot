@@ -15,14 +15,14 @@ import time
 from typing import List, Dict
 import math
 from fuzzywuzzy import process
-from main import record_audio, convert_to_16khz_mono, transcribe_with_google  # Import from main.py
+from main import record_audio, convert_to_16khz_mono, transcribe_with_google
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 # Load environment variables
-load_dotenv()
+load_dotenv(dotenv_path=r"D:\OneDrive\Desktop\projects\chatbot\backend\.env")
 
 app = FastAPI(title="KMIT Chatbot",
               description="Chatbot for KMIT queries using RAG with Gemini AI and distance calculation")

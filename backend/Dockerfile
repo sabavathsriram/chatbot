@@ -1,25 +1,26 @@
 FROM python:3.11-slim
 
-WORKDIR /app
-
+# Install system dependencies for pyaudio
 RUN apt-get update && apt-get install -y \
-    build-essential \
     portaudio19-dev \
-    libasound-dev \
-    ffmpeg \
-    libavcodec-dev \
-    libavformat-dev \
-    libswresample-dev \
+    gcc \
+    python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --upgrade pip
+# Set working directory
+WORKDIR /app
 
-COPY fastapi_server/requirements.txt .
+# Copy requirements.txt (if you have one)
+COPY requirements.txt .
 
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy application code
 COPY . .
 
-EXPOSE 8000
+# Expose port
+EXPOSE 8001
 
-CMD ["uvicorn", "fastapi_server.app:app", "--host", "0.0.0.0", "--port", "8000"]
+# Command to run the FastAPI application
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8001"]
